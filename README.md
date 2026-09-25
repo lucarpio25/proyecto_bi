@@ -91,6 +91,54 @@ Mediante reportes y visualizaciones, es posible comparar la puntualidad entre pe
 
 De esta manera, la aplicación de BI en el transporte aéreo facilita la identificación de patrones y problemas recurrentes. La información obtenida puede apoyar la planificación de horarios, la asignación de recursos y el seguimiento del desempeño operativo de los vuelos.
 
+## 2. Descripción de la empresa y problemática
+
+### 2.1. Descripción de la empresa
+La empresa elegida para desarrollar el proyecto es American Airlines, cuya principal actividad consiste en proveer servicios de transporte aéreo comercial de pasajeros y carga a nivel nacional e internacional. La compañía cuenta con una extensa red de destinos y complementa sus operaciones con servicios como el programa de fidelización AAdvantage, las salas Admirals Club y su división logística American Airlines Cargo. Asimismo, forma parte de la alianza internacional oneworld. 
+
+Para sostener esta amplia cobertura, American Airlines basa su estructura logística en un modelo de red de centros de conexión (Hub and Spoke), mediante la cual coordina miles de despegues diarios desde aeropuertos estratégicos. Entre ellos se encuentran Dallas/Fort Worth, Charlotte, Chicago, Miami, Nueva York, Los Ángeles, Filadelfia, Phoenix y Washington. La dimensión de estas operaciones permite mantener una amplia cobertura, pero también genera una elevada interdependencia entre vuelos, aeronaves, aeropuertos y horarios. 
+
+Así, debido a esta elevada magnitud de operaciones, la compañía genera grandes volúmenes de datos relacionados con vuelos, rutas, aeropuertos, horarios, retrasos y cancelaciones. Esta información resulta adecuada para aplicar herramientas de Business Intelligence que permitan evaluar el desempeño operativo e identificar patrones asociados con problemas de puntualidad. Aunque American Airlines realiza vuelos nacionales e internacionales, el presente proyecto analizará únicamente sus operaciones domésticas dentro de Estados Unidos, debido a que la fuente seleccionada corresponde a los registros publicados por el Bureau of Transportation Statistics. 
+
+### 2.2. Problemática
+El sector aeronáutico presenta una alta sensibilidad al tiempo, por lo cual la puntualidad constituye un aspecto importante del desempeño de una aerolínea. Los retrasos, las cancelaciones y los desvíos pueden alterar la programación de aeronaves y tripulaciones, afectar el uso de la infraestructura aeroportuaria y generar inconvenientes para los pasajeros. Según el Bureau of Transportation Statistics, un vuelo se considera retrasado cuando llega o sale 15 minutos o más después del horario programado. 
+
+- **Impacto en la eficiencia operativa:** Las demoras durante la salida, el vuelo o la llegada pueden incrementar el tiempo total de una operación y afectar la utilización de aeronaves y tripulaciones. Asimismo, las cancelaciones y los retrasos prolongados pueden requerir ajustes en la programación y generar gastos adicionales para la aerolínea. Aunque la base empleada no contiene los costos monetarios ocasionados por estas situaciones, sí permite analizar variables operativas como el tiempo de taxi, la duración del vuelo, los minutos de retraso y el número de cancelaciones.
+- **Impacto en la puntualidad:** Las interrupciones en el servicio pueden generar un efecto dominó. Por ejemplo, un retraso inicial causado por la llegada tardía de una aeronave puede afectar los vuelos posteriores programados para ese avión y sus respectivas tripulaciones. El Bureau of Transportation Statistics clasifica las causas de demora en cinco categorías generales: factores atribuibles a la aerolínea, clima extremo, Sistema Nacional de Aviación, seguridad y llegada tardía de la aeronave anterior.
+- **Impacto en los pasajeros:** Los retrasos y las cancelaciones prolongan el tiempo de espera, pueden ocasionar la pérdida de conexiones y obligar a modificar los itinerarios de los pasajeros. Estas situaciones pueden afectar negativamente su experiencia de viaje. Sin embargo, debido a que la base seleccionada no contiene encuestas de satisfacción ni información individual de los pasajeros, este impacto será considerado como una consecuencia de la problemática y no como una variable medida directamente en el proyecto. 
+
+American Airlines realiza una gran cantidad de vuelos domésticos en Estados Unidos, cuyo desempeño operativo puede verse afectado por retrasos, cancelaciones y desvíos. Estos eventos varían según factores como la fecha, el horario, la ruta, los aeropuertos involucrados y las causas de demora. Debido al elevado volumen de registros y a la diversidad de variables operativas, resulta difícil identificar patrones y determinar qué factores concentran los mayores problemas mediante consultas convencionales.
+
+Por ello, existe la necesidad de integrar y organizar esta información mediante una solución de Business Intelligence que permita analizar el desempeño operativo de los vuelos domésticos de American Airlines. La solución facilitará el seguimiento de indicadores de puntualidad, retrasos, cancelaciones y desvíos, así como la identificación de los periodos, rutas, aeropuertos y causas que presentan mayores incidencias. De esta manera, se proporcionará información que pueda apoyar la planificación y la toma de decisiones operativas.
+
+### 2.3. Objetivo general
+Diseñar e implementar una solución de Business Intelligence para analizar el proceso operativo de la aerolínea American Airlines, estructurada mediante un modelo en estrella e integrada con los registros del Bureau of Transportation Statistics, con el fin de transformar grandes volúmenes de datos operativos en información analítica que permita identificar patrones de retraso, rutas y aeropuertos críticos, franjas horarias con mayor incidencia y causas de interrupción, apoyando la toma de decisiones orientadas a mejorar la puntualidad y la eficiencia operativa. 
+
+### 2.4. Objetivos específicos
+- **Consolidar y preparar la fuente de datos operativa:** Extraer, limpiar y transformar los registros de vuelos del Bureau of Transportation Statistics para construir una base de datos analítica estandarizada, validando posibles inconsistencias y valores faltantes.
+- **Analizar los patrones temporales de demoras:** Identificar las franjas horarias del día y los días de la semana con mayor promedio de retrasos y mayor frecuencia de vuelos demorados por más de 15 minutos.
+- **Evaluar el comportamiento operativo por rutas y aeropuertos:** Determinar las rutas de origen a destino y los aeropuertos que concentran el mayor tiempo promedio de retraso en las llegadas y la mayor tasa de cancelaciones de vuelos.
+- **Analizar las causas de las interrupciones:** Clasificar los minutos de demora según causas atribuibles a la aerolínea, clima, Sistema Nacional de Aviación, seguridad o llegada tardía de aeronaves, evaluando la participación de esta última causa en los retrasos registrados por la compañía.
+- **Diseñar el Data Mart multidimensional y los tableros de control:** Construir un modelo dimensional en estrella con al menos ocho dimensiones y desarrollar tableros de control interactivos que faciliten el monitoreo del desempeño operativo y la puntualidad para apoyar la toma de decisiones.
+
+### 2.5. Preguntas de negocio
+
+#### Análisis por tiempo y horarios
+- ¿Cuáles son las franjas horarias del día en las que se registran los mayores minutos promedio de demora en la salida?
+- ¿En qué días de la semana se concentra la mayor cantidad de vuelos retrasados por más de 15 minutos?
+
+#### Análisis por ubicación y rutas
+- ¿Qué rutas presentan el mayor tiempo promedio de retraso en la llegada?
+- ¿Qué aeropuertos de origen registran la mayor proporción de vuelos cancelados respecto del total de salidas programadas?
+
+#### Análisis por causas de demora
+- ¿Qué causa acumula el mayor volumen de minutos de retraso entre factores atribuibles a la aerolínea, clima, Sistema Nacional de Aviación, seguridad y llegada tardía de aeronaves?
+- ¿Qué proporción del total de minutos de demora clasificados por causa corresponde a la llegada tardía de la aeronave anterior?
+
+#### Análisis de cancelaciones y desvíos
+- ¿Cuáles son las causas de cancelación más frecuentes?
+- ¿En qué rutas, aeropuertos y periodos se registra la mayor proporción de vuelos desviados?
+
 # 3. Modelamiento de Datos Dimensional
 
 ## 3.1. Fuente de datos
@@ -393,9 +441,6 @@ Dos dimensiones cumplen más de un rol:
 
 - `DimHora` se relaciona mediante `HoraSalidaProgramadaKey` y `HoraLlegadaProgramadaKey`.
 - `DimAeropuerto` se relaciona mediante `AeropuertoOrigenKey` y `AeropuertoDestinoKey`.
-
-Esta estructura permite reutilizar una misma dimensión para conceptos que comparten los mismos atributos, evitando duplicar información dentro del Datamart.
-
 
 ## Bibliografía
 
