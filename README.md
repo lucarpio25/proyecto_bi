@@ -6,7 +6,6 @@
 
 - Luciana Carpio
 - Sofía Briceño
-- Gustavo Barrantes
 - Adriano Raffo
 
 ## 1. Marco teórico
