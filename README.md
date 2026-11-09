@@ -8,9 +8,11 @@
 
 - Sofía Briceño
 
-- Gustavo Barrantes
-
 - Adriano Raffo
+
+## Base de datos
+
+**[Descargar la base de datos completa — BD_pagos.xlsx](https://drive.google.com/file/d/1Ri3luNhryb4HQ4lAhFL6C7V5P442mG6m/view?usp=drive_link)**
 
 ## 1. Marco teórico
 
