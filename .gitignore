@@ -1,0 +1,15 @@
+# Base completa y respaldos
+datos/BD_pagos.xlsx
+*.bak
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Configuración local
+.env
+.venv/
+.spyproject/
+
+# Archivos temporales de Excel
+~$*.xlsx
