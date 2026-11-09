@@ -1,0 +1,6 @@
+pandas
+openpyxl
+pyodbc
+dash
+plotly
+numpy
