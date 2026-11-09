@@ -1,11 +1,15 @@
-# Proyecto Final — Análisis de la demanda y el gasto de las prestaciones de salud del sector privado peruano
+# Proyecto Final - Análisis de la demanda y el gasto de las prestaciones de salud del sector privado peruano
 
-**Curso:** Business Intelligence
+**Business Intelligence**
 
-**Integrantes**
+**Integrantes:**
 
 - Luciana Carpio
+
 - Sofía Briceño
+
+- Gustavo Barrantes
+
 - Adriano Raffo
 
 ## 1. Marco teórico
@@ -24,7 +28,7 @@ Un data warehouse o almacén de datos es un sistema diseñado para recopilar, in
 
 Algunas de sus características son las siguientes: está orientado a temas, porque organiza los datos según áreas relevantes; es integrado, ya que reúne información con formatos consistentes; es variante en el tiempo, porque permite analizar datos históricos; y es no volátil, debido a que la información almacenada se mantiene estable para su consulta.
 
-### 1.3. Data mart
+### 1.3. Data Mart
 
 Un Data Mart es una base de datos analítica orientada a un área, proceso o tema específico de una organización. A diferencia de un data warehouse, que puede integrar información de distintas áreas empresariales, un Data Mart contiene un conjunto más delimitado de datos y busca responder necesidades concretas de análisis. Esta especialización facilita el acceso a la información relevante y permite realizar consultas enfocadas en un determinado proceso de negocio.
 
@@ -34,21 +38,15 @@ Un Data Mart puede obtener sus datos de un data warehouse, pero también puede c
 
 El modelamiento multidimensional es una técnica utilizada para organizar los datos de forma que puedan ser consultados y analizados con facilidad. Su diseño parte de un proceso de negocio y separa la información en hechos, que representan eventos o métricas de negocio, y dimensiones, que proporcionan el contexto necesario para analizarlos, como el tiempo, la ubicación o la empresa involucrada.
 
-Para elaborar un modelo multidimensional, primero se selecciona el proceso de negocio, luego se define la granularidad, es decir, qué representa cada fila de la tabla de hechos. Después se identifican las dimensiones y las medidas asociadas al proceso. Esta organización permite filtrar, agrupar y resumir grandes cantidades de datos desde distintas perspectivas. A continuación, se describen el modelo estrella y los elementos principales del modelamiento multidimensional:
+Para elaborar un modelo multidimensional, primero se selecciona el proceso de negocio, luego se define la granularidad, es decir, qué representa cada fila de la tabla de hechos. Después se identifican las dimensiones y las medidas asociadas al proceso. Esta organización permite filtrar, agrupar y resumir grandes cantidades de datos desde distintas perspectivas. Existen varios tipos de modelos multidimensionales como los siguientes:
 
-#### 1.4.1. Modelo estrella
+- **Modelo estrella:** Está conformado por una tabla de hechos central conectada directamente con diferentes tablas de dimensiones, lo cual forma una figura similar a una estrella. La tabla central almacena los eventos y medidas del proceso analizado, mientras que las dimensiones contienen la información descriptiva empleada para filtrar y agrupar los resultados. Su diseño facilita la comprensión del modelo, reduce la complejidad de las consultas y permite analizar las medidas desde distintas perspectivas. Además, las dimensiones suelen estar desnormalizadas, es decir, sus atributos se conservan en una misma tabla para simplificar el análisis.
 
-Está conformado por una tabla de hechos central conectada directamente con diferentes tablas de dimensiones, lo cual forma una figura similar a una estrella. La tabla central almacena los eventos y medidas del proceso analizado, mientras que las dimensiones contienen la información descriptiva empleada para filtrar y agrupar los resultados. Su diseño facilita la comprensión del modelo, reduce la complejidad de las consultas y permite analizar las medidas desde distintas perspectivas. Además, las dimensiones suelen estar desnormalizadas, es decir, sus atributos se conservan en una misma tabla para simplificar el análisis.
-
-#### 1.4.2. Tabla de hechos y granularidad
-
-La tabla de hechos es la tabla central de un modelo estrella. En ella se registran los eventos correspondientes a un proceso de negocio y las medidas que se desean analizar, como cantidades, importes, costos o duraciones. También contiene claves foráneas que permiten relacionar cada evento con sus respectivas dimensiones.
+- **Tabla de hechos y granularidad:** La tabla de hechos es la tabla central de un modelo estrella. En ella se registran los eventos correspondientes a un proceso de negocio y las medidas que se desean analizar, como cantidades, importes, costos o duraciones. También contiene claves foráneas que permiten relacionar cada evento con sus respectivas dimensiones. 
 
 La granularidad define exactamente qué representa cada fila de la tabla de hechos. Por ejemplo, una fila podría representar una venta completa o un producto individual dentro de una venta. Esta definición debe realizarse antes de seleccionar las dimensiones y medidas, ya que todos los datos de la tabla deben corresponder al mismo nivel de detalle. Una granularidad correctamente definida permite interpretar las medidas de manera consistente y evita combinar información perteneciente a distintos niveles de análisis.
 
-#### 1.4.3. Tablas de dimensiones
-
-Las tablas de dimensiones almacenan la información descriptiva que permite interpretar y analizar los registros de la tabla de hechos. Sus atributos responden preguntas como quién, qué, cuándo, dónde y cómo ocurrió un evento. Estas tablas se utilizan para filtrar, clasificar y agrupar las medidas. Además, pueden contener jerarquías que permiten analizar la información con distintos niveles de detalle mediante atributos organizados en niveles, como año, trimestre y mes.
+- **Tablas de dimensiones:** Las tablas de dimensiones almacenan la información descriptiva que permite interpretar y analizar los registros de la tabla de hechos. Sus atributos responden preguntas como quién, qué, cuándo, dónde y cómo ocurrió un evento. Estas tablas se utilizan para filtrar, clasificar y agrupar las medidas. Además, pueden contener jerarquías que permiten analizar la información con distintos niveles de detalle como departamento, provincia y distrito.
 
 Cada dimensión posee una clave que identifica de manera única sus registros y que se conecta con la tabla de hechos. En los modelos dimensionales suelen utilizarse claves sustitutas, generadas específicamente para el data warehouse, en lugar de depender únicamente de los identificadores de los sistemas de origen.
 
@@ -56,7 +54,7 @@ Cada dimensión posee una clave que identifica de manera única sus registros y 
 
 El proceso ETL comprende las etapas de extracción, transformación y carga de datos. En la extracción se obtiene la información desde las fuentes originales; durante la transformación, los datos se limpian, organizan, integran y adaptan a la estructura requerida; finalmente, en la carga, la información procesada se almacena en un data warehouse, Data Mart u otro repositorio de destino.
 
-Este proceso permite convertir datos provenientes de diferentes archivos o sistemas en información consistente y preparada para el análisis. Durante la transformación pueden realizarse actividades como la corrección de formatos, el tratamiento de valores nulos, la eliminación de duplicados, la validación de registros y la creación de campos derivados. De esta manera, ETL contribuye a mejorar la calidad y uniformidad de los datos utilizados en una solución de Business Intelligence.
+Este proceso permite convertir datos provenientes de diferentes archivos o sistemas en información consistente y preparada para el análisis. Durante la transformación pueden realizarse actividades como la corrección de formatos, el tratamiento de valores nulos, la eliminación de duplicados, la validación de registros y la creación de campos derivados. De esta manera, ETL contribuye a mejorar la calidad y uniformidad de los datos utilizados en una solución de Business Intelligence
 
 ### 1.6. Procesamiento analítico OLAP
 
@@ -68,7 +66,7 @@ OLAP también permite cambiar el nivel de detalle del análisis. Por ejemplo, se
 
 ### 1.7. Indicadores de prestaciones y gastos de salud
 
-Los indicadores de prestaciones y gastos de salud permiten analizar la demanda de servicios y la distribución de los recursos económicos asociados con la atención de los pacientes. Entre los principales indicadores se encuentran la cantidad de prestaciones realizadas, el monto total liquidado por las IAFAS, el monto promedio liquidado por prestación, el promedio de días de estancia facturable por prestación hospitalaria y la participación de cada componente en la suma de los gastos registrados, como honorarios, farmacia, laboratorio, imágenes, hotelería y prótesis. Los copagos se analizarán por separado para distinguir los gastos de la atención de la participación económica del paciente.
+Los indicadores de prestaciones y gastos de salud permiten analizar la demanda de servicios y la distribución de los recursos económicos asociados con la atención de los pacientes. Entre los principales indicadores se encuentran la cantidad de prestaciones realizadas, el gasto total liquidado, el gasto promedio por prestación, los días promedio de estancia hospitalaria y la participación de cada componente en el gasto total, como honorarios, farmacia, laboratorio, imágenes, hotelería y prótesis. Los copagos se analizan por separado, de acuerdo con su significado.
 
 Estos indicadores permiten comparar los resultados entre periodos, establecimientos de salud, aseguradoras, diagnósticos, tipos de cobertura y ubicaciones geográficas. Su análisis facilita la identificación de prestaciones con mayor demanda, componentes que concentran los gastos y diferencias en la utilización de los servicios, proporcionando información relevante para mejorar la planificación y apoyar la toma de decisiones en el sector salud.
 
@@ -88,7 +86,7 @@ SUSALUD tiene competencia sobre las Instituciones Prestadoras de Servicios de Sa
 
 Como parte de sus funciones de supervisión, SUSALUD recopila y publica información sobre las prestaciones realizadas en establecimientos privados. Los registros contienen datos anonimizados sobre aseguradoras, establecimientos, pacientes, diagnósticos, coberturas, hospitalizaciones, ubicación y diferentes componentes del gasto. Por ello, esta información resulta apropiada para la aplicación de herramientas de Business Intelligence que permitan analizar la demanda de prestaciones, la distribución de los gastos y las diferencias entre establecimientos, coberturas y grupos de pacientes.
 
-El presente proyecto analizará únicamente las prestaciones reportadas por las IPRESS privadas registradas en SUSALUD que, durante el año anterior a la presentación de la información, registraron una facturación mensual promedio igual o superior a veinte Unidades Impositivas Tributarias. Esta delimitación responde al alcance de los archivos publicados por SUSALUD y significa que los resultados no representan necesariamente a todos los establecimientos privados de salud del Perú (SUSALUD, 2025).
+El presente proyecto analizará únicamente las prestaciones reportadas por las IPRESS privadas registradas en SUSALUD que, durante el año anterior a la presentación de la información, registraron una facturación mensual promedio igual o superior a veinte Unidades Impositivas Tributarias. Esta delimitación responde al alcance de los archivos publicados por SUSALUD y significa que los resultados no representan necesariamente a todos los establecimientos privados de salud del Perú (SUSALUD, 2025b).
 
 ### 2.2. Problemática
 
@@ -98,17 +96,15 @@ Como parte de esta labor, SUSALUD publica mensualmente registros detallados de l
 
 - **Impacto en la gestión de los gastos:** Cada prestación puede contener diferentes componentes económicos. El análisis separado de estos campos dificulta conocer qué conceptos concentran la mayor proporción del gasto y cómo varían según el diagnóstico, la cobertura, el establecimiento o la aseguradora. Al integrar la información se pueden identificar patrones de gasto elevado que requieran un análisis más detallado, sin asumir necesariamente que representan ineficiencias o cobros inadecuados.
 
-- **Impacto en la planificación de las prestaciones:** La cantidad y características de las atenciones pueden variar según el periodo, el diagnóstico u otros factores. Sin una estructura analítica que permita relacionar estas variables, resulta difícil identificar los servicios con mayor utilización, los grupos que concentran determinadas prestaciones y los periodos en los que se registra una mayor demanda. Esta información es relevante para orientar la planificación y el seguimiento de los servicios de salud.
+- **Impacto en la planificación de las prestaciones:** La cantidad y características de las atenciones pueden variar según el periodo, el diagnóstico, u otros factores. Sin una estructura analítica que permita relacionar estas variables, resulta difícil identificar los servicios con mayor utilización, los grupos que concentran determinadas prestaciones y los periodos en los que se registra una mayor demanda. Esta información es relevante para orientar la planificación y el seguimiento de los servicios de salud.
 
-- **Impacto en la gestión de la información:** Los datos se publican en archivos mensuales y contienen diferentes fechas, códigos anonimizados, categorías de atención y medidas monetarias. Para analizarlos de manera conjunta es necesario consolidarlos, estandarizar sus formatos y organizarlos bajo un nivel de detalle común. Para el alcance de este proyecto, se requiere un modelo analítico que permita elaborar indicadores consistentes y comparar los resultados entre las distintas perspectivas de análisis.
+- **Impacto en la gestión de la información:** Los datos se publican en archivos mensuales y contienen diferentes fechas, códigos anonimizados, categorías de atención y medidas monetarias. Para analizarlos de manera conjunta es necesario consolidarlos, estandarizar sus formatos y organizarlos bajo un nivel de detalle común. La ausencia de un modelo analítico específicamente preparado para el proyecto limitaría la elaboración de indicadores consistentes y la comparación de resultados entre las distintas perspectivas de análisis.
 
-Por ello, existe la necesidad de integrar y organizar los registros de prestaciones de salud privadas mediante una solución de Business Intelligence. Esta solución permitirá realizar el seguimiento de indicadores como la cantidad de prestaciones, el monto total y promedio liquidado, la composición del gasto y los días de estancia facturable. Asimismo, facilitará la identificación de patrones según periodo, IAFAS, IPRESS, diagnóstico, cobertura, ubicación y características del paciente, proporcionando información que pueda apoyar la supervisión y la toma de decisiones basada en datos.
+Por ello, existe la necesidad de integrar y organizar los registros de prestaciones de salud privadas mediante una solución de Business Intelligence. Esta solución permitirá realizar el seguimiento de indicadores como la cantidad de prestaciones, el gasto total y promedio, la composición del gasto y los días de estancia hospitalaria. Asimismo, facilitará la identificación de patrones según periodo, IAFAS, IPRESS, diagnóstico, cobertura, ubicación y características del paciente, proporcionando información que pueda apoyar la supervisión y la toma de decisiones basada en datos.
 
-El análisis estará limitado a las IPRESS privadas incluidas en los archivos publicados por SUSALUD, las cuales corresponden a establecimientos que alcanzaron el nivel de facturación establecido para el reporte. Además, debido a que la fuente no contiene información completa sobre resultados clínicos, capacidad instalada o satisfacción del paciente, el proyecto no evaluará la calidad médica, la necesidad clínica de las prestaciones ni la rentabilidad de los establecimientos. Su alcance se concentrará en la utilización registrada y en la distribución de los gastos asociados (SUSALUD, 2025).
+El análisis estará limitado a las IPRESS privadas incluidas en los archivos publicados por SUSALUD, las cuales corresponden a establecimientos que alcanzaron el nivel de facturación establecido para el reporte. Además, debido a que la fuente no contiene información completa sobre resultados clínicos, capacidad instalada o satisfacción del paciente, el proyecto no evaluará la calidad médica, la necesidad clínica de las prestaciones ni la rentabilidad de los establecimientos. Su alcance se concentrará en la utilización registrada y en la distribución de los gastos asociados (SUSALUD, 2025b).
 
-**Pregunta general de la problemática:**
-
-> ¿Cómo puede una solución de Business Intelligence integrar y analizar los registros de prestaciones de salud del sector privado publicados por SUSALUD para identificar patrones de utilización y gasto que apoyen la planificación, supervisión y toma de decisiones?
+Pregunta general de la problemática: ¿Cómo puede una solución de Business Intelligence integrar y analizar los registros de prestaciones de salud del sector privado publicados por SUSALUD para identificar patrones de utilización y gasto que apoyen la planificación, supervisión y toma de decisiones?
 
 ### 2.3. Objetivo general
 
@@ -118,29 +114,29 @@ Diseñar e implementar una solución de Business Intelligence para analizar las 
 
 1. **Consolidar y preparar la fuente de datos:** Extraer, integrar, limpiar y transformar los archivos mensuales publicados por SUSALUD para construir una base de datos analítica estandarizada, validando formatos, registros duplicados, valores faltantes y consistencia de los montos.
 
-2. **Analizar los patrones de utilización de las prestaciones:** Identificar los periodos, diagnósticos, tipos de cobertura y subtipos de prestación que concentran la mayor cantidad de atenciones registradas.
+1. **Analizar los patrones de utilización de las prestaciones:** Identificar los periodos, diagnósticos, tipos de cobertura y subtipos de prestación que concentran la mayor cantidad de atenciones registradas.
 
-3. **Evaluar la distribución de las prestaciones:** Comparar la cantidad de atenciones y los gastos asociados según IAFAS, IPRESS, ubicación geográfica y características demográficas de los pacientes, como sexo y grupo etario.
+1. **Evaluar la distribución de las prestaciones:** Comparar la cantidad de atenciones y los gastos asociados según IAFAS, IPRESS, ubicación geográfica y características demográficas de los pacientes, como sexo y grupo etario.
 
-4. **Analizar la composición de los gastos:** Determinar la participación de los honorarios, procedimientos, farmacia, laboratorio, imágenes, hotelería, prótesis y otros conceptos en la suma de los componentes del gasto registrados, y analizar por separado los copagos, identificando los componentes y categorías que concentran los mayores montos.
+1. **Analizar la composición de los gastos:** Determinar la participación de los honorarios, procedimientos, farmacia, laboratorio, imágenes, hotelería, prótesis y otros conceptos en la suma de componentes de gasto registrados y analizar los copagos por separado, identificando los componentes y categorías que concentran los mayores montos.
 
-5. **Diseñar el data mart multidimensional y los tableros de control:** Construir un modelo dimensional en estrella con al menos ocho dimensiones y desarrollar tableros interactivos que faciliten el seguimiento de la utilización, los gastos y las estancias hospitalarias, apoyando la planificación, supervisión y toma de decisiones.
+1. **Diseñar el data mart multidimensional y los tableros de control:** Construir un modelo dimensional en estrella con al menos ocho dimensiones y desarrollar tableros interactivos que faciliten el seguimiento de la utilización, los gastos y las estancias hospitalarias, apoyando la planificación, supervisión y toma de decisiones.
 
 ### 2.5. Preguntas de negocio
 
-#### Análisis temporal de las prestaciones
+**Análisis temporal de las prestaciones**
 
-- ¿Cómo varían mensualmente la cantidad de prestaciones registradas y el monto total liquidado por las IAFAS?
+- ¿Cómo varían la cantidad de prestaciones registradas y sus montos liquidados según el mes de recepción de la información en TEDEF?
 
-- ¿En qué periodos se observa el mayor monto promedio liquidado por prestación?
+- ¿En qué meses de recepción se observa el mayor monto promedio liquidado por prestación?
 
-#### Análisis por diagnósticos y coberturas
+**Análisis por diagnósticos y coberturas**
 
 - ¿Qué diagnósticos y tipos de cobertura concentran la mayor cantidad de prestaciones?
 
 - ¿Qué diagnósticos presentan los mayores montos totales y promedios liquidados por prestación?
 
-#### Análisis por establecimientos, aseguradoras y ubicación
+**Análisis por establecimientos, aseguradoras y ubicación**
 
 - ¿Qué IPRESS e IAFAS concentran la mayor cantidad de prestaciones y los mayores montos liquidados?
 
@@ -148,37 +144,35 @@ Diseñar e implementar una solución de Business Intelligence para analizar las 
 
 - ¿Cómo se distribuyen las prestaciones y los gastos registrados según la ubicación del establecimiento y la residencia del afiliado?
 
-#### Análisis de la composición del gasto y los copagos
+**Análisis de la composición del gasto y los copagos**
 
 - ¿Qué proporción de la suma de los componentes de gasto registrados corresponde a farmacia, honorarios y procedimientos, laboratorio, imágenes, hotelería y otros conceptos?
 
 - ¿Cómo varían los copagos promedio por prestación según la IAFAS y el tipo de cobertura?
 
-#### Análisis por características de los pacientes
+**Análisis por características de los pacientes**
 
 - ¿Qué grupos etarios y sexos concentran la mayor cantidad de prestaciones y los mayores montos liquidados?
 
 - ¿Cuáles son los diagnósticos más frecuentes entre las prestaciones registradas para cada grupo etario?
 
-#### Análisis de hospitalización
+**Análisis de hospitalización**
 
 Entre las prestaciones hospitalarias, ¿qué diagnósticos y tipos de hospitalización presentan el mayor promedio de días de estancia facturable?
 
 - ¿Cómo varía el monto promedio liquidado por prestación hospitalaria según los días de estancia facturable y el diagnóstico?
 
-## 3. Modelamiento dimensional de datos
+## 3. Modelamiento de datos dimensional
 
 ### 3.1. Fuente de datos
 
-La fuente principal del proyecto es el conjunto de datos Registro de datos de atenciones de la cobertura prestacional de salud del sector privado, publicado por la Superintendencia Nacional de Salud (SUSALUD) en la Plataforma Nacional de Datos Abiertos. La base contiene información de prestaciones realizadas por determinadas Instituciones Prestadoras de Servicios de Salud (IPRESS) privadas registradas en SUSALUD. Incluye campos sobre aseguradoras (IAFAS), establecimientos (IPRESS), diagnósticos, cobertura, fechas de atención, hospitalización, datos demográficos anonimizados y componentes del gasto asociado a las prestaciones (SUSALUD, 2025).
+La fuente principal del proyecto es el conjunto de datos Registro de datos de atenciones de la cobertura prestacional de salud del sector privado, publicado por la Superintendencia Nacional de Salud (SUSALUD) en la Plataforma Nacional de Datos Abiertos. La base contiene información de prestaciones realizadas por determinadas Instituciones Prestadoras de Servicios de Salud (IPRESS) privadas registradas en SUSALUD. Incluye campos sobre aseguradoras (IAFAS), establecimientos (IPRESS), diagnósticos, cobertura, fechas de atención, hospitalización, datos demográficos anonimizados y componentes del gasto asociado a las prestaciones (SUSALUD, 2025b).
 
 Para el proyecto se descargaron los archivos mensuales correspondientes a enero, febrero y marzo de 2026. Los tres archivos fueron consolidados en una sola base mediante Power Query. El conjunto resultante contiene 781,556 registros y 40 campos, por lo que supera el requisito mínimo de 500,000 registros. Se conservó el campo `Source.Name` para identificar el archivo mensual del que proviene cada registro.
 
-Los meses señalados corresponden a los archivos de publicación descargados y pueden incluir prestaciones realizadas en fechas anteriores. El análisis temporal de las atenciones utilizará la fecha de prestación.
-
 La información incluye montos de honorarios y procedimientos, farmacia, laboratorio, imágenes, hotelería, prótesis, copagos, total de gastos cubiertos y monto liquidado por las IAFAS. Estos campos permitirán analizar la cantidad y distribución de las prestaciones, así como la composición de los gastos según periodo, diagnóstico, cobertura, aseguradora, establecimiento y ubicación. Los códigos anonimizados de pacientes, IAFAS e IPRESS se conservarán como identificadores analíticos, sin intentar identificar a las personas o instituciones.
 
-La fuente fue seleccionada porque es oficial, contiene información detallada sobre prestaciones y gastos, y permite construir indicadores útiles para analizar su utilización y distribución. El conjunto de datos y su diccionario se encuentran en la [página oficial de SUSALUD](https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado).
+La fuente fue seleccionada porque es oficial, contiene información detallada sobre prestaciones y gastos, y permite construir indicadores útiles para analizar su utilización y distribución. El conjunto de datos y su diccionario se encuentran en la página oficial de SUSALUD.
 
 ### 3.2. Descripción general de los datos
 
@@ -190,50 +184,50 @@ Los campos monetarios detallan gastos por honorarios y procedimientos, farmacia,
 
 El diccionario de la fuente describe los campos originales utilizados durante la preparación de los datos. Posteriormente, los diccionarios de la tabla de hechos y de las dimensiones describen la estructura propuesta para el Data Mart. Por lo tanto, algunos campos de la fuente se transforman, se separan entre diferentes tablas o se excluyen del modelo analítico.
 
-Los tipos de datos y la columna «Nulos» corresponden a la propuesta de almacenamiento; no representan una validación exhaustiva de todos los registros. Las fechas en formato AAAAMMDD se convertirán a `DATE` y los ubigeos se prepararán como texto de seis caracteres.
-
 | Nombre del campo | Tipo de dato propuesto | Descripción del campo | Nulos |
 | --- | --- | --- | --- |
-| `Source.Name` | `VARCHAR(255)` | Nombre del archivo mensual de origen. | No |
-| `VCODIAFAS_FAC` | `VARCHAR(64)` | Código anonimizado de la Institución Administradora de Fondos de Aseguramiento en Salud (IAFAS). | No |
-| `VCODIPRESS_FAC` | `VARCHAR(64)` | Código anonimizado de la Institución Prestadora de Servicios de Salud (IPRESS). | No |
-| `VTDOCPAGO_FAC` | `VARCHAR(10)` | Código del tipo de documento de pago. | No |
-| `VNDOCPAGO_FAC` | `VARCHAR(64)` | Número anonimizado del documento de pago. | No |
-| `VCORRPRESTA_ATE` | `INT` | Correlativo de la prestación dentro del documento de pago. | No |
-| `VTAFILPAC_ATE` | `VARCHAR(10)` | Código del tipo de afiliación del paciente. | No |
-| `VTDOCIDEN_ATE` | `VARCHAR(10)` | Código del tipo de documento de identidad del paciente. | No |
-| `VNUMDOCIDEN_ATE` | `VARCHAR(64)` | Número anonimizado del documento de identidad del paciente. | No |
-| `VTIPOCOBERT_ATE` | `VARCHAR(10)` | Código del tipo de cobertura o prestación de salud. | No |
-| `VSUBTIPCOBERT_ATE` | `VARCHAR(10)` | Código del subtipo de cobertura de la prestación. | No |
-| `VPRIDIAGCIE_ATE` | `VARCHAR(10)` | Código del primer diagnóstico registrado, según la clasificación CIE-10. | No |
-| `VFECPRES_ATE` | `DATE` | Fecha en que se realizó la prestación de salud. | No |
-| `VTITPRORESPRES_ATE` | `VARCHAR(10)` | Código del tipo de profesional responsable de la prestación. | No |
-| `VTIPOHOSPI_ATE` | `VARCHAR(10)` | Código del tipo de hospitalización, cuando corresponde. | Sí |
-| `VFECINGRHOSP_ATE` | `DATE` | Fecha de ingreso hospitalario. | Sí |
-| `VFECEGRHOSP_ATE` | `DATE` | Fecha de egreso hospitalario. | Sí |
-| `VTIPEGREHOSP_ATE` | `VARCHAR(10)` | Código del tipo de egreso hospitalario. | Sí |
-| `VDIASESTFAC_ATE` | `INT` | Cantidad de días de estancia facturable. | Sí |
-| `VFECNACPAC_ATE` | `DATE` | Fecha de nacimiento del paciente. | No |
-| `VSEXOPAC_ATE` | `VARCHAR(10)` | Código del sexo del paciente. | No |
-| `VFILIAPAC_ATE` | `VARCHAR(10)` | Código de filiación del paciente. | No |
-| `VUBIGEOIPRESS_ATE` | `CHAR(6)` | Código de ubicación geográfica de la IPRESS, según el INEI. | No |
-| `VGASTHONPROSIGV_ATE` | `DECIMAL(18,2)` | Gasto por honorarios y procedimientos, sin IGV. | No |
-| `VGASTPRODOSIGV_ATE` | `DECIMAL(18,2)` | Gasto por procedimientos odontológicos, sin IGV. | No |
-| `VGASTHTSCLITOPSIGV_ATE` | `DECIMAL(18,2)` | Gasto presentado por hotelería, servicio clínico y tópico, sin IGV. | No |
-| `VGASTEXAUXLABSIGV_ATE` | `DECIMAL(18,2)` | Gasto por exámenes auxiliares de laboratorio, sin IGV. | No |
-| `VGASTEXAUXIMGSIGV_ATE` | `DECIMAL(18,2)` | Gasto por exámenes auxiliares por imágenes, sin IGV. | No |
-| `VGASTFARINSSIGV_ATE` | `DECIMAL(18,2)` | Gasto por farmacia e insumos, sin IGV. | No |
-| `VGASTPROTSIGV_ATE` | `DECIMAL(18,2)` | Gasto en prótesis, sin IGV. | No |
-| `VGASTMEDEXOIGV_ATE` | `DECIMAL(18,2)` | Gasto en productos, servicios o medicamentos exonerados de IGV. | No |
-| `VOGPRESSLDSIGV_ATE` | `DECIMAL(18,2)` | Otros gastos por prestaciones de salud, sin IGV. | No |
-| `VCOPAGOFIJOSIGV_ATE` | `DECIMAL(18,2)` | Copago fijo correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
-| `VCPAGOFIJOEXIGV_ATE` | `DECIMAL(18,2)` | Copago fijo correspondiente a conceptos exonerados de IGV. | No |
-| `VCOPAGOVARSIGV_ATE` | `DECIMAL(18,2)` | Copago variable correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
-| `VCPAGOVAREXIGV_ATE` | `DECIMAL(18,2)` | Copago variable correspondiente a conceptos exonerados de IGV. | No |
-| `VTOTGASTCUBSIGV_ATE` | `DECIMAL(18,2)` | Total de gastos cubiertos, sin IGV. | No |
-| `VTOTLIQIAFAS_ATE` | `DECIMAL(18,2)` | Monto total liquidado por la IAFAS. | No |
-| `DFECRECEP_PQ` | `DATETIME2(0)` | Fecha y hora de recepción de la información en el TEDEF. | No |
-| `UBIGEO_AFILIADO` | `CHAR(6)` | Código de ubicación geográfica del afiliado. | Sí |
+| Source.Name | VARCHAR(255) | Nombre del archivo mensual de origen. | No |
+| VCODIAFAS_FAC | VARCHAR(64) | Código anonimizado de la Institución Administradora de Fondos de Aseguramiento en Salud (IAFAS). | No |
+| VCODIPRESS_FAC | VARCHAR(64) | Código anonimizado de la Institución Prestadora de Servicios de Salud (IPRESS). | No |
+| VTDOCPAGO_FAC | VARCHAR(10) | Código del tipo de documento de pago. | No |
+| VNDOCPAGO_FAC | VARCHAR(64) | Número anonimizado del documento de pago. | No |
+| VCORRPRESTA_ATE | INT | Correlativo de la prestación dentro del documento de pago. | No |
+| VTAFILPAC_ATE | VARCHAR(10) | Código del tipo de afiliación del paciente. | No |
+| VTDOCIDEN_ATE | VARCHAR(10) | Código del tipo de documento de identidad del paciente. | No |
+| VNUMDOCIDEN_ATE | VARCHAR(64) | Número anonimizado del documento de identidad del paciente. | No |
+| VTIPOCOBERT_ATE | VARCHAR(10) | Código del tipo de cobertura o prestación de salud. | No |
+| VSUBTIPCOBERT_ATE | VARCHAR(10) | Código del subtipo de cobertura de la prestación. | No |
+| VPRIDIAGCIE_ATE | VARCHAR(10) | Código del primer diagnóstico registrado, según la clasificación CIE-10. | No |
+| VFECPRES_ATE | DATE | Fecha en que se realizó la prestación de salud. | No |
+| VTITPRORESPRES_ATE | VARCHAR(10) | Código del tipo de profesional responsable de la prestación. | No |
+| VTIPOHOSPI_ATE | VARCHAR(10) | Código del tipo de hospitalización, cuando corresponde. | Sí |
+| VFECINGRHOSP_ATE | DATE | Fecha de ingreso hospitalario. | Sí |
+| VFECEGRHOSP_ATE | DATE | Fecha de egreso hospitalario. | Sí |
+| VTIPEGREHOSP_ATE | VARCHAR(10) | Código del tipo de egreso hospitalario. | Sí |
+| VDIASESTFAC_ATE | INT | Cantidad de días de estancia facturable. | Sí |
+| VFECNACPAC_ATE | DATE | Fecha de nacimiento del paciente. | No |
+| VSEXOPAC_ATE | VARCHAR(10) | Código del sexo del paciente. | No |
+| VFILIAPAC_ATE | VARCHAR(10) | Código de filiación del paciente. | No |
+| VUBIGEOIPRESS_ATE | CHAR(6) | Código de ubicación geográfica de la IPRESS, según el INEI. | No |
+| VGASTHONPROSIGV_ATE | DECIMAL(18,2) | Gasto por honorarios y procedimientos, sin IGV. | No |
+| VGASTPRODOSIGV_ATE | DECIMAL(18,2) | Gasto por procedimientos odontológicos, sin IGV. | No |
+| VGASTHTSCLITOPSIGV_ATE | DECIMAL(18,2) | Gasto presentado por hotelería, servicio clínico y tópico, sin IGV. | No |
+| VGASTEXAUXLABSIGV_ATE | DECIMAL(18,2) | Gasto por exámenes auxiliares de laboratorio, sin IGV. | No |
+| VGASTEXAUXIMGSIGV_ATE | DECIMAL(18,2) | Gasto por exámenes auxiliares por imágenes, sin IGV. | No |
+| VGASTFARINSSIGV_ATE | DECIMAL(18,2) | Gasto por farmacia e insumos, sin IGV. | No |
+| VGASTPROTSIGV_ATE | DECIMAL(18,2) | Gasto en prótesis, sin IGV. | No |
+| VGASTMEDEXOIGV_ATE | DECIMAL(18,2) | Gasto en productos, servicios o medicamentos exonerados de IGV. | No |
+| VOGPRESSLDSIGV_ATE | DECIMAL(18,2) | Otros gastos por prestaciones de salud, sin IGV. | No |
+| VCOPAGOFIJOSIGV_ATE | DECIMAL(18,2) | Copago fijo correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
+| VCPAGOFIJOEXIGV_ATE | DECIMAL(18,2) | Copago fijo correspondiente a conceptos exonerados de IGV. | No |
+| VCOPAGOVARSIGV_ATE | DECIMAL(18,2) | Copago variable correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
+| VCPAGOVAREXIGV_ATE | DECIMAL(18,2) | Copago variable correspondiente a conceptos exonerados de IGV. | No |
+| VTOTGASTCUBSIGV_ATE | DECIMAL(18,2) | Total de gastos cubiertos, sin IGV. | No |
+| VTOTLIQIAFAS_ATE | DECIMAL(18,2) | Monto total liquidado por la IAFAS. | No |
+| DFECRECEP_PQ | DATETIME2(0) | Fecha y hora de recepción de la información en el TEDEF. | No |
+| UBIGEO_AFILIADO | CHAR(6) | Código de ubicación geográfica del afiliado. | Sí |
+
+En este diccionario, «Nulos» describe la disponibilidad observada en la fuente consolidada. La nulabilidad física del datamart se presenta por separado en las secciones 3.6 y 3.7.
 
 ### 3.4. Proceso de negocio
 
@@ -243,9 +237,11 @@ El análisis permitirá evaluar la cantidad de prestaciones, la composición de 
 
 ### 3.5. Granularidad
 
+
+
 La granularidad de la tabla de hechos corresponde a una prestación de salud registrada, asociada con un paciente, una IPRESS, una IAFAS y un documento de pago, dentro del cual se identifica mediante un correlativo.
 
-Por lo tanto, cada fila de `FactPrestacionSalud` representa una prestación e incluye sus respectivas claves dimensionales, componentes del gasto, copagos y monto liquidado por la IAFAS. Las prestaciones que no implican hospitalización también se conservan, aunque las fechas de ingreso y egreso de la fuente pueden estar vacías. En el modelo, sus claves se vincularán con registros especiales de «No aplica», mientras que los días de estancia facturable podrán permanecer como `NULL`.
+Por lo tanto, cada fila de FactPrestacionSalud representa una prestación e incluye sus respectivas claves dimensionales, componentes del gasto, copagos y monto liquidado por la IAFAS. Las prestaciones que no implican hospitalización también se conservan, aunque sus fechas de ingreso y egreso y sus días de estancia facturable pueden contener valores nulos.
 
 La granularidad puede expresarse de la siguiente manera:
 
@@ -255,7 +251,7 @@ Esta definición asegura que las medidas económicas y los días de estancia fac
 
 ### 3.6. Tabla de hechos
 
-La tabla `FactPrestacionSalud` constituye la tabla central del modelo dimensional. Cada registro representa una prestación de salud registrada dentro de un documento de pago, vinculada con un paciente, una IPRESS y una IAFAS, e identificada dentro del documento mediante un correlativo.
+La tabla FactPrestacionSalud constituye la tabla central del modelo dimensional. Cada registro representa una prestación de salud registrada dentro de un documento de pago, vinculada con un paciente, una IPRESS y una IAFAS, e identificada dentro del documento mediante un correlativo.
 
 Esta tabla contiene las claves foráneas que relacionan cada prestación con sus dimensiones y las medidas utilizadas para analizar la cantidad de prestaciones, los componentes del gasto, los copagos, los montos liquidados y los días de estancia facturable. También conserva los identificadores del documento de pago y el correlativo para facilitar la trazabilidad y la validación de los registros.
 
@@ -263,197 +259,601 @@ Los campos se presentan con nombres más comprensibles, manteniendo su correspon
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `PrestacionKey` | `BIGINT` | Clave sustituta que identifica de manera única cada registro de la tabla de hechos. | No |
-| `FechaPrestacionKey` | `INT` | Clave foránea que relaciona la prestación con su fecha de atención en `DimFecha`. | No |
-| `FechaIngresoKey` | `INT` | Clave foránea que relaciona la prestación con su fecha de ingreso hospitalario en `DimFecha`. | No |
-| `FechaEgresoKey` | `INT` | Clave foránea que relaciona la prestación con su fecha de egreso hospitalario en `DimFecha`. | No |
-| `FechaRecepcionKey` | `INT` | Clave foránea que relaciona la prestación con la fecha de recepción de la información en el TEDEF, mediante `DimFecha`. | No |
-| `IafasKey` | `INT` | Clave foránea que identifica la entidad financiadora en `DimIAFAS`. | No |
-| `IpressKey` | `INT` | Clave foránea que identifica el establecimiento de salud en `DimIPRESS`. | No |
-| `PacienteKey` | `INT` | Clave foránea que relaciona la prestación con el paciente anonimizado en `DimPaciente`. | No |
-| `AfiliacionKey` | `INT` | Clave foránea que relaciona la prestación con las condiciones de afiliación del paciente en `DimAfiliacion`. | No |
-| `CoberturaKey` | `INT` | Clave foránea que identifica el tipo y subtipo de cobertura en `DimCobertura`. | No |
-| `DiagnosticoKey` | `INT` | Clave foránea que identifica el diagnóstico principal registrado en `DimDiagnostico`. | No |
-| `TipoProfesionalKey` | `INT` | Clave foránea que identifica la categoría del profesional responsable en `DimTipoProfesional`. | No |
-| `HospitalizacionKey` | `INT` | Clave foránea que identifica el tipo de hospitalización y de egreso en `DimHospitalizacion`. | No |
-| `UbicacionIpressKey` | `INT` | Clave foránea que identifica la ubicación del establecimiento de salud en `DimUbicacion`. | No |
-| `UbicacionAfiliadoKey` | `INT` | Clave foránea que identifica la ubicación del afiliado en `DimUbicacion`. | No |
-| `TipoDocumentoPago` | `VARCHAR(10)` | Código del tipo de documento de pago asociado con la prestación. | No |
-| `DocumentoPagoAnonimizado` | `VARCHAR(64)` | Número anonimizado del documento de pago asociado con la prestación. | No |
-| `CorrelativoPrestacion` | `INT` | Correlativo que identifica la prestación dentro del documento de pago. | No |
-| `CantidadPrestaciones` | `TINYINT` | Contador de prestaciones. Toma el valor 1 por cada registro. | No |
-| `DiasEstanciaFacturable` | `INT` | Cantidad de días de estancia facturable registrados para la prestación, cuando corresponde. | Sí |
-| `GastoHonorariosProcedimientos` | `DECIMAL(18,2)` | Gasto por honorarios y procedimientos, sin IGV. | No |
-| `GastoOdontologia` | `DECIMAL(18,2)` | Gasto por procedimientos odontológicos, sin IGV. | No |
-| `GastoHoteleriaServicioClinicoTopico` | `DECIMAL(18,2)` | Gasto presentado por hotelería, servicio clínico y tópico, sin IGV. | No |
-| `GastoLaboratorio` | `DECIMAL(18,2)` | Gasto por exámenes auxiliares de laboratorio, sin IGV. | No |
-| `GastoImagenes` | `DECIMAL(18,2)` | Gasto por exámenes auxiliares por imágenes, sin IGV. | No |
-| `GastoFarmaciaInsumos` | `DECIMAL(18,2)` | Gasto por farmacia e insumos, sin IGV. | No |
-| `GastoProtesis` | `DECIMAL(18,2)` | Gasto en prótesis, sin IGV. | No |
-| `GastoExoneradoIGV` | `DECIMAL(18,2)` | Gasto en productos, servicios o medicamentos exonerados de IGV. | No |
-| `OtrosGastos` | `DECIMAL(18,2)` | Otros gastos por prestaciones de salud, sin IGV. | No |
-| `CopagoFijoAfectoSinIGV` | `DECIMAL(18,2)` | Copago fijo correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
-| `CopagoFijoExonerado` | `DECIMAL(18,2)` | Copago fijo correspondiente a conceptos exonerados de IGV. | No |
-| `CopagoVariableAfectoSinIGV` | `DECIMAL(18,2)` | Copago variable correspondiente a conceptos afectos a IGV, expresado sin IGV. | No |
-| `CopagoVariableExonerado` | `DECIMAL(18,2)` | Copago variable correspondiente a conceptos exonerados de IGV. | No |
-| `TotalGastosCubiertosSinIGV` | `DECIMAL(18,2)` | Total de gastos cubiertos, sin IGV, registrado para la prestación. | No |
-| `TotalLiquidadoIAFAS` | `DECIMAL(18,2)` | Monto total liquidado por la IAFAS para la prestación. | No |
+| PrestacionKey | BIGINT | Clave sustituta que identifica de manera única cada registro de la tabla de hechos. | No |
+| FechaPrestacionKey | INT | Clave foránea que relaciona la prestación con su fecha de atención en DimFecha. | No |
+| FechaIngresoKey | INT | Clave foránea que relaciona la prestación con su fecha de ingreso hospitalario en DimFecha. | No |
+| FechaEgresoKey | INT | Clave foránea que relaciona la prestación con su fecha de egreso hospitalario en DimFecha. | No |
+| FechaRecepcionKey | INT | Clave foránea que relaciona la prestación con la fecha de recepción de la información en el TEDEF, mediante DimFecha. | No |
+| IafasKey | INT | Clave foránea que identifica la entidad financiadora en DimIAFAS. | No |
+| IpressKey | INT | Clave foránea que identifica el establecimiento de salud en DimIPRESS. | No |
+| PacienteKey | INT | Clave foránea que relaciona la prestación con el perfil demográfico reportado en DimPaciente. | No |
+| AfiliacionKey | INT | Clave foránea que relaciona la prestación con las condiciones de afiliación del paciente en DimAfiliacion. | No |
+| CoberturaKey | INT | Clave foránea que identifica el tipo y subtipo de cobertura en DimCobertura. | No |
+| DiagnosticoKey | INT | Clave foránea que identifica el diagnóstico principal registrado en DimDiagnostico. | No |
+| TipoProfesionalKey | INT | Clave foránea que identifica la categoría del profesional responsable en DimTipoProfesional. | No |
+| HospitalizacionKey | INT | Clave foránea que identifica el tipo de hospitalización y de egreso en DimHospitalizacion. | No |
+| UbicacionIpressKey | INT | Clave foránea que identifica la ubicación del establecimiento de salud en DimUbicacion. | No |
+| UbicacionAfiliadoKey | INT | Clave foránea que identifica la ubicación del afiliado en DimUbicacion. | No |
+| TipoDocumentoPago | VARCHAR(10) | Código del tipo de documento de pago asociado con la prestación. | Sí |
+| DocumentoPagoAnonimizado | VARCHAR(64) | Número anonimizado del documento de pago asociado con la prestación. | Sí |
+| CorrelativoPrestacion | INT | Correlativo que identifica la prestación dentro del documento de pago. | Sí |
+| CantidadPrestaciones | TINYINT | Contador de prestaciones. Toma el valor 1 por cada registro. | Sí |
+| DiasEstanciaFacturable | INT | Cantidad de días de estancia facturable registrados para la prestación, cuando corresponde. | Sí |
+| GastoHonorariosProcedimientos | DECIMAL(18,2) | Gasto por honorarios y procedimientos, sin IGV. | Sí |
+| GastoOdontologia | DECIMAL(18,2) | Gasto por procedimientos odontológicos, sin IGV. | Sí |
+| GastoHoteleriaServicioClinicoTopico | DECIMAL(18,2) | Gasto presentado por hotelería, servicio clínico y tópico, sin IGV. | Sí |
+| GastoLaboratorio | DECIMAL(18,2) | Gasto por exámenes auxiliares de laboratorio, sin IGV. | Sí |
+| GastoImagenes | DECIMAL(18,2) | Gasto por exámenes auxiliares por imágenes, sin IGV. | Sí |
+| GastoFarmaciaInsumos | DECIMAL(18,2) | Gasto por farmacia e insumos, sin IGV. | Sí |
+| GastoProtesis | DECIMAL(18,2) | Gasto en prótesis, sin IGV. | Sí |
+| GastoExoneradoIGV | DECIMAL(18,2) | Gasto en productos, servicios o medicamentos exonerados de IGV. | Sí |
+| OtrosGastos | DECIMAL(18,2) | Otros gastos por prestaciones de salud, sin IGV. | Sí |
+| CopagoFijoAfectoSinIGV | DECIMAL(18,2) | Copago fijo correspondiente a conceptos afectos a IGV, expresado sin IGV. | Sí |
+| CopagoFijoExonerado | DECIMAL(18,2) | Copago fijo correspondiente a conceptos exonerados de IGV. | Sí |
+| CopagoVariableAfectoSinIGV | DECIMAL(18,2) | Copago variable correspondiente a conceptos afectos a IGV, expresado sin IGV. | Sí |
+| CopagoVariableExonerado | DECIMAL(18,2) | Copago variable correspondiente a conceptos exonerados de IGV. | Sí |
+| TotalGastosCubiertosSinIGV | DECIMAL(18,2) | Total de gastos cubiertos, sin IGV, registrado para la prestación. | Sí |
+| TotalLiquidadoIAFAS | DECIMAL(18,2) | Monto total liquidado por la IAFAS para la prestación. | Sí |
 
-Las claves foráneas no admitirán valores nulos. Para las prestaciones sin hospitalización se utilizarán registros especiales de «No aplica» en las dimensiones correspondientes. Cuando un dato no esté informado, como la ubicación del afiliado, se utilizará un registro de «Desconocido». Los días de estancia facturable permanecerán como `NULL` cuando no correspondan, evitando incorporarlos como ceros en los promedios de estancia.
+La columna «Nulos» refleja el DDL del script de creación. Aunque los campos del documento de pago y CantidadPrestaciones admiten NULL físicamente, el ETL comprueba que la identificación esté completa y asigna el contador 1 en todas las prestaciones de esta carga.
+
+Las claves foráneas no admitirán valores nulos. Para las prestaciones sin hospitalización se utilizarán registros especiales de «No aplica» en las dimensiones correspondientes. Cuando un dato no esté informado, como la ubicación del afiliado, se utilizará un registro de «Desconocido». Los días de estancia facturable permanecerán como NULL cuando no correspondan, evitando incorporarlos como ceros en los promedios de estancia.
 
 Los componentes del gasto, los copagos y los totales se analizarán según su significado. No se sumarán todos estos campos para obtener un nuevo total, porque algunos representan componentes o diferentes formas de distribución de un mismo importe. Asimismo, los días de estancia facturable no se interpretarán automáticamente como días únicos de hospitalización de un paciente.
 
 ### 3.7. Tablas de dimensiones
 
-Las tablas de dimensiones almacenan la información descriptiva que permite analizar las medidas de `FactPrestacionSalud` desde diferentes perspectivas. El modelo cuenta con diez dimensiones: fecha, IAFAS, IPRESS, paciente, afiliación, cobertura, diagnóstico, tipo de profesional, hospitalización y ubicación.
+Las tablas de dimensiones almacenan la información descriptiva que permite analizar las medidas de FactPrestacionSalud desde diferentes perspectivas. El modelo cuenta con diez dimensiones: fecha, IAFAS, IPRESS, paciente, afiliación, cobertura, diagnóstico, tipo de profesional, hospitalización y ubicación.
 
-`DimFecha` y `DimUbicacion` cumplen varias funciones dentro del modelo. `DimFecha` representa las fechas de prestación, ingreso hospitalario, egreso hospitalario y recepción de la información. Por su parte, `DimUbicacion` representa la ubicación de la IPRESS y la del afiliado.
+DimFecha y DimUbicacion cumplen varias funciones dentro del modelo. DimFecha representa las fechas de prestación, ingreso hospitalario, egreso hospitalario y recepción de la información. Por su parte, DimUbicacion representa la ubicación de la IPRESS y la del afiliado.
 
-#### DimFecha
+#### 3.7.1. DimFecha
 
 Permite analizar las prestaciones y sus gastos según diferentes periodos y niveles de detalle temporal. Se relaciona cuatro veces con la tabla de hechos, de acuerdo con la función de cada fecha.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `FechaKey` | `INT` | Clave primaria de la dimensión. Utiliza el formato AAAAMMDD para fechas válidas y valores reservados para registros especiales. | No |
-| `Fecha` | `DATE` | Fecha completa. | Sí |
-| `Anio` | `SMALLINT` | Año de la fecha. | Sí |
-| `Trimestre` | `TINYINT` | Trimestre del año, con valores del 1 al 4. | Sí |
-| `Mes` | `TINYINT` | Número del mes, con valores del 1 al 12. | Sí |
-| `NombreMes` | `VARCHAR(15)` | Nombre del mes. | Sí |
-| `Dia` | `TINYINT` | Día del mes, con valores del 1 al 31. | Sí |
-| `DiaSemana` | `TINYINT` | Día de la semana: 1 = lunes y 7 = domingo. | Sí |
-| `NombreDiaSemana` | `VARCHAR(15)` | Nombre del día de la semana. | Sí |
-| `TipoRegistroFecha` | `VARCHAR(20)` | Clasifica el registro como fecha válida, no aplica o desconocida. | No |
+| FechaKey | INT | Clave primaria de la dimensión. Utiliza el formato AAAAMMDD para fechas válidas y valores reservados para registros especiales. | No |
+| Fecha | DATE | Fecha completa. | Sí |
+| Anio | SMALLINT | Año de la fecha. | Sí |
+| Trimestre | TINYINT | Trimestre del año, con valores del 1 al 4. | Sí |
+| Mes | TINYINT | Número del mes, con valores del 1 al 12. | Sí |
+| NombreMes | VARCHAR(15) | Nombre del mes. | Sí |
+| Dia | TINYINT | Día del mes, con valores del 1 al 31. | Sí |
+| DiaSemana | TINYINT | Día de la semana: 1 = lunes y 7 = domingo. | Sí |
+| NombreDiaSemana | VARCHAR(15) | Nombre del día de la semana. | Sí |
+| TipoRegistroFecha | VARCHAR(20) | Clasifica el registro como fecha válida, no aplica o desconocida. | No |
 
 Los atributos temporales admitirán valores nulos únicamente en los registros especiales de «No aplica» y «Desconocido». Esto permite conservar claves foráneas no nulas en la tabla de hechos sin asignar fechas ficticias a las prestaciones.
 
-#### DimIAFAS
+#### 3.7.2. DimIAFAS
 
 Identifica a la entidad que administra los fondos de aseguramiento vinculados con la prestación. Permite comparar la cantidad de prestaciones, los gastos, los copagos y los montos liquidados entre entidades.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `IafasKey` | `INT` | Clave sustituta de la dimensión IAFAS. | No |
-| `CodigoIafasAnonimizado` | `VARCHAR(64)` | Código anonimizado de la IAFAS, procedente de `VCODIAFAS_FAC`. | No |
+| IafasKey | INT | Clave sustituta de la dimensión IAFAS. | No |
+| CodigoIafasAnonimizado | VARCHAR(64) | Código anonimizado de la IAFAS, procedente de VCODIAFAS_FAC. | No |
 
 La fuente contiene códigos anonimizados, por lo que no permite identificar el nombre real de cada IAFAS.
 
-#### DimIPRESS
+#### 3.7.3. DimIPRESS
 
 Identifica al establecimiento de salud asociado con la prestación. Permite comparar la utilización y los gastos registrados entre establecimientos.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `IpressKey` | `INT` | Clave sustituta de la dimensión IPRESS. | No |
-| `CodigoIpressAnonimizado` | `VARCHAR(64)` | Código anonimizado de la IPRESS, procedente de `VCODIPRESS_FAC`. | No |
+| IpressKey | INT | Clave sustituta de la dimensión IPRESS. | No |
+| CodigoIpressAnonimizado | VARCHAR(64) | Código anonimizado de la IPRESS, procedente de VCODIPRESS_FAC. | No |
 
-La ubicación del establecimiento se relaciona directamente con la tabla de hechos mediante `UbicacionIpressKey`. El código anonimizado no permite conocer el nombre real del establecimiento.
+La ubicación del establecimiento se relaciona directamente con la tabla de hechos mediante UbicacionIpressKey. El código anonimizado no permite conocer el nombre real del establecimiento.
 
-#### DimPaciente
+#### 3.7.4. DimPaciente
 
-Contiene el identificador anonimizado del paciente y sus características demográficas. Permite analizar las prestaciones según sexo y calcular la edad del paciente en la fecha de atención.
+Contiene los perfiles demográficos reportados, identificados mediante la combinación de tipo de documento, identificador anonimizado, fecha de nacimiento y sexo. Permite analizar las prestaciones según sexo y calcular la edad en la fecha de atención. Debido a las inconsistencias detectadas, una misma combinación de tipo de documento e identificador anonimizado puede asociarse con varios perfiles; por ello, PacienteKey no identifica necesariamente a una persona única verificada.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `PacienteKey` | `INT` | Clave sustituta de la dimensión paciente. | No |
-| `TipoDocumentoIdentidad` | `VARCHAR(10)` | Código del tipo de documento de identidad del paciente, procedente de `VTDOCIDEN_ATE`. | No |
-| `PacienteAnonimizado` | `VARCHAR(64)` | Número anonimizado del documento de identidad del paciente, procedente de `VNUMDOCIDEN_ATE`. | No |
-| `FechaNacimiento` | `DATE` | Fecha de nacimiento del paciente, procedente de `VFECNACPAC_ATE`. | No |
-| `CodigoSexo` | `VARCHAR(10)` | Código del sexo del paciente, procedente de `VSEXOPAC_ATE`. | No |
+| PacienteKey | INT | Clave sustituta de la dimensión paciente. | No |
+| TipoDocumentoIdentidad | VARCHAR(10) | Código del tipo de documento de identidad del paciente, procedente de VTDOCIDEN_ATE. | No |
+| PacienteAnonimizado | VARCHAR(64) | Número anonimizado del documento de identidad del paciente, procedente de VNUMDOCIDEN_ATE. | No |
+| FechaNacimiento | DATE | Fecha de nacimiento del paciente, procedente de VFECNACPAC_ATE. | No |
+| CodigoSexo | VARCHAR(10) | Código del sexo del paciente, procedente de VSEXOPAC_ATE. | No |
+| DescripcionSexo | VARCHAR(20) | Descripción del código de sexo, obtenida del diccionario oficial de SUSALUD. | Sí |
+| DescripcionTipoDocumentoIdentidad | VARCHAR(100) | Descripción del tipo de documento de identidad, obtenida del diccionario oficial de SUSALUD. | Sí |
 
 La edad y el grupo etario se calcularán utilizando la fecha de nacimiento y la fecha de prestación. Así, la clasificación reflejará la edad que tenía el paciente cuando recibió la atención.
 
-#### DimAfiliacion
+#### 3.7.5. DimAfiliacion
 
-Describe el tipo de afiliación y la filiación del paciente registrados para cada prestación. Se mantiene separada de `DimPaciente` porque estas condiciones pueden variar entre atenciones.
+Describe el tipo de afiliación y la filiación del paciente registrados para cada prestación. Se mantiene separada de DimPaciente porque estas condiciones pueden variar entre atenciones.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `AfiliacionKey` | `INT` | Clave sustituta de la dimensión afiliación. | No |
-| `CodigoTipoAfiliacion` | `VARCHAR(10)` | Código del tipo de afiliación del paciente, procedente de `VTAFILPAC_ATE`. | No |
-| `CodigoFiliacionPaciente` | `VARCHAR(10)` | Código de filiación del paciente, procedente de `VFILIAPAC_ATE`. | No |
+| AfiliacionKey | INT | Clave sustituta de la dimensión afiliación. | No |
+| CodigoTipoAfiliacion | VARCHAR(10) | Código del tipo de afiliación del paciente, procedente de VTAFILPAC_ATE. | No |
+| CodigoFiliacionPaciente | VARCHAR(10) | Código de filiación del paciente, procedente de VFILIAPAC_ATE. | No |
+| DescripcionTipoAfiliacion | VARCHAR(100) | Descripción del tipo de afiliación del paciente, obtenida del diccionario oficial de SUSALUD. | Sí |
+| DescripcionFiliacionPaciente | VARCHAR(100) | Descripción de la filiación del paciente, obtenida del diccionario oficial de SUSALUD. | Sí |
 
-#### DimCobertura
+#### 3.7.6. DimCobertura
 
 Permite clasificar las prestaciones según el tipo y subtipo de cobertura, y comparar su cantidad, gastos y copagos.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `CoberturaKey` | `INT` | Clave sustituta de la dimensión cobertura. | No |
-| `CodigoTipoCobertura` | `VARCHAR(10)` | Código del tipo de cobertura o prestación de salud, procedente de `VTIPOCOBERT_ATE`. | No |
-| `CodigoSubtipoCobertura` | `VARCHAR(10)` | Código del subtipo de cobertura, procedente de `VSUBTIPCOBERT_ATE`. | No |
+| CoberturaKey | INT | Clave sustituta de la dimensión cobertura. | No |
+| CodigoTipoCobertura | VARCHAR(10) | Código del tipo de cobertura o prestación de salud, procedente de VTIPOCOBERT_ATE. | No |
+| CodigoSubtipoCobertura | VARCHAR(10) | Código del subtipo de cobertura, procedente de VSUBTIPCOBERT_ATE. | No |
+| DescripcionTipoCobertura | VARCHAR(100) | Descripción del tipo de cobertura, obtenida del diccionario oficial de SUSALUD. | Sí |
 
-#### DimDiagnostico
+La descripción del subtipo de cobertura permanece pendiente de un catálogo oficial verificable; su código se conserva en el modelo.
+
+#### 3.7.7. DimDiagnostico
 
 Permite analizar la cantidad de prestaciones, los gastos y las estancias facturables según el diagnóstico principal registrado.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `DiagnosticoKey` | `INT` | Clave sustituta de la dimensión diagnóstico. | No |
-| `CodigoDiagnosticoCIE10` | `VARCHAR(10)` | Código del primer diagnóstico registrado, procedente de `VPRIDIAGCIE_ATE`. | No |
-| `DescripcionDiagnostico` | `VARCHAR(500)` | Descripción del diagnóstico, obtenida de un catálogo oficial CIE-10 compatible con la fuente. | Sí |
+| DiagnosticoKey | INT | Clave sustituta de la dimensión diagnóstico. | No |
+| CodigoDiagnosticoCIE10 | VARCHAR(10) | Código del primer diagnóstico registrado, procedente de VPRIDIAGCIE_ATE. | No |
+| DescripcionDiagnostico | VARCHAR(500) | Descripción del diagnóstico, obtenida de un catálogo oficial CIE-10 compatible con la fuente. | Sí |
 
-La descripción se incorporará mediante una tabla auxiliar. Los códigos que no encuentren correspondencia se conservarán y quedarán pendientes de revisión.
+La descripción se incorporó mediante el catálogo oficial CIE-10 del MINSA. Los 5 599 códigos de diagnóstico utilizados encontraron correspondencia. Se mantiene la posibilidad de conservar códigos sin descripción y registrarlos para revisión en futuras cargas (Ministerio de Salud, s. f.-a).
 
-#### DimTipoProfesional
+#### 3.7.8. DimTipoProfesional
 
 Permite analizar las prestaciones según la categoría del profesional responsable. Representa tipos de profesionales, dado que la fuente no identifica individualmente a cada profesional.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `TipoProfesionalKey` | `INT` | Clave sustituta de la dimensión tipo de profesional. | No |
-| `CodigoTipoProfesional` | `VARCHAR(10)` | Código del tipo de profesional responsable de la prestación, procedente de `VTITPRORESPRES_ATE`. | No |
+| TipoProfesionalKey | INT | Clave sustituta de la dimensión tipo de profesional. | No |
+| CodigoTipoProfesional | VARCHAR(10) | Código del tipo de profesional responsable de la prestación, procedente de VTITPRORESPRES_ATE. | Sí |
+| DescripcionTipoProfesional | VARCHAR(100) | Descripción de la categoría del profesional responsable, obtenida del diccionario oficial de SUSALUD. | Sí |
 
-#### DimHospitalizacion
+#### 3.7.9. DimHospitalizacion
 
 Clasifica las prestaciones según el tipo de hospitalización y el tipo de egreso. Las fechas de ingreso y egreso y los días de estancia facturable se mantienen relacionados con la tabla de hechos.
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `HospitalizacionKey` | `INT` | Clave sustituta de la dimensión hospitalización. | No |
-| `CodigoTipoHospitalizacion` | `VARCHAR(10)` | Código del tipo de hospitalización, procedente de `VTIPOHOSPI_ATE`. | Sí |
-| `CodigoTipoEgreso` | `VARCHAR(10)` | Código del tipo de egreso hospitalario, procedente de `VTIPEGREHOSP_ATE`. | Sí |
+| HospitalizacionKey | INT | Clave sustituta de la dimensión hospitalización. | No |
+| CodigoTipoHospitalizacion | VARCHAR(10) | Código del tipo de hospitalización, procedente de VTIPOHOSPI_ATE. | Sí |
+| CodigoTipoEgreso | VARCHAR(10) | Código del tipo de egreso hospitalario, procedente de VTIPEGREHOSP_ATE. | Sí |
+| DescripcionTipoHospitalizacion | VARCHAR(100) | Descripción del tipo de hospitalización, obtenida del diccionario oficial de SUSALUD. | Sí |
+| DescripcionTipoEgreso | VARCHAR(100) | Descripción del tipo de egreso hospitalario, obtenida del diccionario oficial de SUSALUD. | Sí |
 
-Se incluirá un registro especial de «No aplica» para las prestaciones sin hospitalización. Los datos faltantes en prestaciones hospitalarias se distinguirán mediante un registro de «Desconocido».
+Se incluyó una combinación con códigos de hospitalización y egreso nulos para las prestaciones sin hospitalización, descrita como «No aplica». En esta carga no se generó un registro adicional de «Desconocido» en DimHospitalizacion. Las fechas hospitalarias desconocidas se representan mediante la clave 0 de DimFecha.
 
-#### DimUbicacion
+#### 3.7.10. DimUbicacion
 
-Contiene la información geográfica que permite analizar la distribución territorial de las prestaciones y los gastos. Se relaciona dos veces con la tabla de hechos: como ubicación de la IPRESS y como ubicación del afiliado. Los códigos de ubigeo proceden de los campos `VUBIGEOIPRESS_ATE` y `UBIGEO_AFILIADO` de la fuente principal. Para incorporar los nombres de departamento, provincia y distrito, se utilizará una tabla auxiliar oficial de ubigeos del INEI, vinculada mediante el código geográfico de seis caracteres.
+Contiene la información geográfica que permite analizar la distribución territorial de las prestaciones y los gastos. Se relaciona dos veces con la tabla de hechos: como ubicación de la IPRESS y como ubicación del afiliado. El campo VUBIGEOIPRESS_ATE utiliza la codificación INEI, mientras que UBIGEO_AFILIADO utiliza RENIEC. Para unificar ambas ubicaciones y obtener los nombres de departamento, provincia y distrito, se utilizó el catálogo de equivalencias publicado por el MINSA (Ministerio de Salud, s. f.-b).
 
 | Campo | Tipo de dato | Descripción | Nulos |
 | --- | --- | --- | --- |
-| `UbicacionKey` | `INT` | Clave sustituta de la dimensión ubicación. | No |
-| `Ubigeo` | `CHAR(6)` | Código geográfico procedente de `VUBIGEOIPRESS_ATE` o `UBIGEO_AFILIADO`. | Sí |
-| `Departamento` | `VARCHAR(100)` | Nombre del departamento, obtenido mediante un catálogo oficial del INEI. | Sí |
-| `Provincia` | `VARCHAR(100)` | Nombre de la provincia, obtenido mediante un catálogo oficial del INEI. | Sí |
-| `Distrito` | `VARCHAR(100)` | Nombre del distrito, obtenido mediante un catálogo oficial del INEI. | Sí |
+| UbicacionKey | INT | Clave sustituta de la dimensión ubicación. | No |
+| Ubigeo | CHAR(6) | Código INEI de seis caracteres: original para la IPRESS y obtenido por equivalencia RENIEC–INEI para el afiliado. | Sí |
+| Departamento | VARCHAR(100) | Nombre de el departamento, obtenido del catálogo de equivalencias publicado por el MINSA. | Sí |
+| Provincia | VARCHAR(100) | Nombre de la provincia, obtenido del catálogo de equivalencias publicado por el MINSA. | Sí |
+| Distrito | VARCHAR(100) | Nombre de el distrito, obtenido del catálogo de equivalencias publicado por el MINSA. | Sí |
 
-Los ubigeos se almacenarán como texto de seis caracteres para conservar sus ceros iniciales. Se incluirá un registro de «Desconocido» para ubicaciones no informadas; los códigos disponibles que no encuentren correspondencia en el catálogo se conservarán para su revisión.
+Los ubigeos se almacenan como texto de seis caracteres para conservar sus ceros iniciales. DimUbicacion conserva códigos INEI. Las ubicaciones no informadas o sin equivalencia se relacionan con un registro «Desconocido»; el código original del afiliado y el motivo de falta de correspondencia se conservan en la preparación y en los archivos de control.
+
+## 4. Implementación del proceso ETL
+
+El proceso de extracción, transformación y carga permitió preparar los registros de prestaciones de salud y almacenarlos en el datamart. La implementación comprendió la revisión de formatos, la integración de catálogos descriptivos, el tratamiento de incidencias de calidad y la carga de las dimensiones y la tabla de hechos.
+
+### 4.1. Entorno y flujo de implementación
+
+El proceso se desarrolló en Python mediante el archivo `poblar_datamart_salud.py`, utilizando SQL Server como repositorio de destino. Se emplearon las siguientes herramientas:
+
+- **pandas:** lectura, limpieza, transformación y organización de los datos.
+
+- **decimal:** tratamiento de los importes monetarios sin introducir aproximaciones de punto flotante durante el ETL.
+
+- **pyodbc:** conexión con SQL Server, ejecución de consultas y carga de registros.
+
+- **pathlib:** construcción de rutas a partir de la ubicación del script, facilitando su ejecución en otras computadoras.
+
+La implementación partió del archivo consolidado `BD_pagos.xlsx` y de los catálogos auxiliares de diagnósticos y ubicaciones. Primero se prepararon las dimensiones; posteriormente, se cargaron y se recuperaron las claves generadas por SQL Server para asociarlas con cada prestación. Finalmente, se cargó FactPrestacionSalud y se verificaron las cantidades de registros y los montos almacenados.
+
+El script también incluye la creación de la base de datos y de las tablas para reproducir la implementación desde cero. La configuración del servidor se encuentra al inicio del archivo.
+
+### 4.2. Extracción de los datos
+
+Se utilizaron los archivos publicados por SUSALUD correspondientes a enero, febrero y marzo de 2026. Estos fueron consolidados previamente mediante Power Query en el archivo `BD_pagos.xlsx`, que contiene 781 556 registros y 40 campos, incluido `Source.Name`, generado durante la consolidación para identificar el archivo mensual de procedencia.
+
+Los meses seleccionados corresponden a los archivos publicados y no delimitan las fechas en las que se realizaron las prestaciones. Por ello, se conservan de manera diferenciada la fecha de prestación y la fecha de recepción de información.
+
+El archivo consolidado se leyó inicialmente como texto para controlar la conversión de los campos y evitar que los códigos e identificadores fueran interpretados automáticamente como medidas numéricas. Luego se asignaron nombres más comprensibles a las columnas, manteniendo su correspondencia con las variables originales.
+
+También se leyeron los siguientes archivos auxiliares:
+
+- `CIE10_MINSA_OFICIAL.xlsx`, para incorporar las descripciones de los diagnósticos.
+
+- `TB_UBIGEOS.csv`, para relacionar las codificaciones RENIEC e INEI e incorporar los nombres de departamento, provincia y distrito.
+
+### 4.3. Limpieza y transformación
+
+#### 4.3.1. Códigos e identificadores
+
+Los códigos se conservaron como texto. Se eliminaron los espacios al inicio y al final de los valores, y las cadenas vacías se identificaron como datos faltantes.
+
+Los ubigeos se validaron para comprobar que contuvieran únicamente dígitos y tuvieran una longitud compatible con el código geográfico. Posteriormente, se completaron los ceros iniciales necesarios para almacenarlos como cadenas de seis caracteres.
+
+Los códigos anonimizados de pacientes, IPRESS e IAFAS se conservaron sin intentar identificar a las personas o instituciones de origen.
+
+#### 4.3.2. Campos monetarios y enteros
+
+Los 15 campos monetarios se convirtieron a valores Decimal. Se comprobó que los importes fueran válidos y pudieran almacenarse exactamente en columnas `DECIMAL(18,2)` de SQL Server.
+
+Los valores nulos se conservaron y no se reemplazaron automáticamente por cero. Esta distinción resulta especialmente relevante para los copagos: un importe igual a cero representa un valor informado, mientras que un nulo indica ausencia de información.
+
+El correlativo de la prestación y los días de estancia facturable se convirtieron a enteros, validando que no presentaran valores negativos, fracciones ni cantidades fuera del rango permitido por el tipo INT.
+
+#### 4.3.3. Fechas
+
+Las fechas de prestación, nacimiento, ingreso y egreso hospitalario se interpretaron a partir del formato original AAAAMMDD. La fecha de recepción se convirtió por separado, conservando inicialmente su componente de hora.
+
+Se verificó la presencia de las fechas obligatorias y la coherencia de las fechas hospitalarias. También se revisó que las prestaciones no fueran posteriores a su recepción y que el egreso hospitalario no fuera anterior al ingreso.
+
+Para construir DimFecha, se generó un calendario continuo a partir de las fechas utilizadas en el análisis. Se incorporaron atributos como año, trimestre, mes, nombre del mes, día y día de la semana. Además, se definieron las claves especiales 0, correspondiente a «Desconocido», y -1, correspondiente a «No aplica».
+
+#### 4.3.4. Identificación de las prestaciones
+
+Se comprobó que cada prestación tuviera completos los siguientes campos de identificación:
+
+- Código anonimizado de la IAFAS.
+
+- Código anonimizado de la IPRESS.
+
+- Tipo de documento de pago.
+
+- Número anonimizado del documento de pago.
+
+- Correlativo de la prestación.
+
+No se encontraron combinaciones repetidas entre los 781 556 registros. Por tanto, no fue necesario eliminar prestaciones por duplicidad. La revisión consideró conjuntamente los tres archivos mensuales para detectar posibles repeticiones entre periodos.
+
+### 4.4. Integración de tablas auxiliares
+
+#### 4.4.1. Catálogo de diagnósticos
+
+Se utilizó el catálogo oficial CIE-10 del MINSA para incorporar DescripcionDiagnostico en DimDiagnostico (Ministerio de Salud, s. f.-a).
+
+Para realizar la correspondencia se creó un código auxiliar de búsqueda que ignoró diferencias de mayúsculas y puntos. Por ejemplo, permitió relacionar un código presentado como A00.0 con su equivalente A000, conservando el código original de la fuente en el modelo.
+
+Los 5599 códigos de diagnóstico utilizados en la base encontraron correspondencia en el catálogo. En consecuencia, ninguna prestación quedó sin descripción de diagnóstico por falta de equivalencia.
+
+#### 4.4.2. Catálogo de ubicaciones
+
+Se identificó que el ubigeo de la IPRESS utiliza la codificación INEI, mientras que el ubigeo del afiliado requiere una equivalencia desde RENIEC hacia INEI. La tabla auxiliar permitió obtener el código INEI y los nombres de departamento, provincia y distrito. Se completó además la equivalencia verificada de Alto Trujillo, RENIEC 120113 e INEI 130112, ausente en la versión del catálogo utilizada.
+
+DimUbicacion se relacionó dos veces con la tabla de hechos: mediante UbicacionIpressKey y UbicacionAfiliadoKey. Ambas relaciones utilizan ubicaciones expresadas en la misma codificación geográfica.
+
+#### 4.4.3. Otras equivalencias descriptivas
+
+A partir del diccionario oficial de SUSALUD (2025a) se incorporaron descripciones para los siguientes códigos:
+
+- Tipo de profesional.
+
+- Tipo de hospitalización y tipo de egreso.
+
+- Tipo de afiliación y filiación del paciente.
+
+- Tipo de cobertura.
+
+- Sexo y tipo de documento de identidad.
+
+Estas descripciones se almacenaron en las dimensiones correspondientes. La descripción del tipo de documento de pago se incorporó mediante la vista de consulta.
+
+Se conservó CodigoSubtipoCobertura sin asignarle una descripción, debido a que no se dispuso de un catálogo oficial verificable para completar sus equivalencias. Este pendiente quedó documentado para una incorporación posterior.
+
+### 4.5. Tratamiento de incidencias de calidad
+
+#### 4.5.1. Inconsistencias demográficas de pacientes
+
+Al agrupar los registros por tipo de documento de identidad e identificador anonimizado, se encontraron 11 711 identificadores asociados con distintas fechas de nacimiento o códigos de sexo.
+
+| Incidencia | Cantidad de identificadores |
+| --- | --- |
+| Con diferentes fechas de nacimiento | 11 570 |
+| Con diferentes códigos de sexo | 6789 |
+| Con alguna de las dos inconsistencias | 11 711 |
+
+Los grupos pueden superponerse: un identificador puede presentar diferencias en ambos campos. Las inconsistencias persistieron al considerar ámbitos más específicos, como IAFAS, IPRESS y archivo de procedencia.
+
+Ante esta situación, no se seleccionó arbitrariamente una fecha de nacimiento o un sexo. DimPaciente se construyó utilizando la combinación de tipo de documento, identificador anonimizado, fecha de nacimiento y sexo. La búsqueda de PacienteKey se realizó mediante esos cuatro campos, conservando el perfil reportado en cada prestación.
+
+Por ello, los registros de esta dimensión representan perfiles demográficos observados, y su cantidad no debe interpretarse como un número de personas únicas verificadas.
+
+#### 4.5.2. Ubigeos del afiliado sin correspondencia
+
+La conversión de ubicaciones del afiliado produjo el siguiente resultado:
+
+| Estado de la ubicación | Cantidad de prestaciones |
+| --- | --- |
+| Con equivalencia INEI | 737 565 |
+| Sin dato de ubigeo | 42 805 |
+| Con código informado, pero sin equivalencia en el catálogo | 1186 |
+| Total | 781 556 |
+
+Las 43 991 prestaciones sin ubicación INEI disponible se relacionaron con el registro «Desconocido» de DimUbicacion. Los códigos originales y la diferencia entre ausencia de dato y ausencia de equivalencia se conservaron en la preparación y en los archivos de control.
+
+Todos los ubigeos de IPRESS encontraron correspondencia en el catálogo.
+
+#### 4.5.3. Fechas hospitalarias posteriores a la recepción
+
+Se detectaron 12 prestaciones con fecha de ingreso posterior a la recepción del dato y 30 con fecha de egreso posterior a la recepción. Considerando la superposición de ambas incidencias, se identificaron 30 prestaciones afectadas.
+
+Las fechas originales se conservaron para revisión. Para el análisis se crearon `FechaIngresoAnalisis` y `FechaEgresoAnalisis`, dejando vacío únicamente el campo observado cuando presentaba esta inconsistencia. No se modificaron los años ni se asignaron fechas alternativas por inferencia.
+
+Las fechas observadas se relacionaron con la clave 0, «Desconocido», de DimFecha. Para las prestaciones sin hospitalización se utilizó la clave -1, «No aplica».
+
+Las prestaciones afectadas permanecieron en la tabla de hechos, conservando sus importes y los días de estancia facturable reportados por la fuente.
+
+### 4.6. Carga y validación del datamart
+
+#### 4.6.1. Carga de dimensiones
+
+Primero se cargaron las diez dimensiones. SQL Server generó sus claves sustitutas mediante IDENTITY, con excepción de DimFecha, cuya clave utiliza el formato AAAAMMDD y los valores especiales definidos.
+
+| Dimensión | Registros cargados |
+| --- | --- |
+| DimFecha | 1961 |
+| DimIAFAS | 24 |
+| DimIPRESS | 232 |
+| DimPaciente | 389 107 |
+| DimAfiliacion | 45 |
+| DimCobertura | 350 |
+| DimDiagnostico | 5599 |
+| DimTipoProfesional | 10 |
+| DimHospitalizacion | 14 |
+| DimUbicacion | 1483 |
+
+Después de la carga, se consultaron las claves almacenadas para asociarlas con las prestaciones. No se asumió que los valores generados por IDENTITY coincidieran con el orden de los DataFrames.
+
+#### 4.6.2. Carga de la tabla de hechos
+
+Se asignaron las 14 claves dimensionales a cada prestación, comprobando que ninguna quedara vacía y que las uniones no incrementaran la cantidad de registros.
+
+Posteriormente, se prepararon los campos del documento de pago, los días de estancia, los 15 montos y el contador CantidadPrestaciones, con valor 1 por registro. SQL Server generó automáticamente PrestacionKey.
+
+Las inserciones se realizaron en lotes de 5 000 registros. Las cargas se organizaron en bloques transaccionales para revertir las inserciones del bloque en curso si se producía un error. El script incluye controles que detienen una nueva carga inicial cuando las tablas ya contienen datos.
+
+#### 4.6.3. Comprobaciones de la carga
+
+Se verificaron los siguientes aspectos:
+
+- La tabla de hechos contiene 781 556 registros, conservando la cantidad de prestaciones de la fuente consolidada.
+
+- La suma de CantidadPrestaciones coincide con el número de filas.
+
+- Las 14 claves dimensionales están informadas.
+
+- Los totales de los 15 campos monetarios coinciden entre Python y SQL Server.
+
+- La cantidad de valores no nulos de cada campo monetario coincide en ambos entornos.
+
+La comparación de valores informados permitió comprobar, además de los totales, que los nulos no fueran sustituidos por ceros durante la carga.
+
+#### 4.6.4. Vista de análisis y archivos de control
+
+Se creó la vista vwPrestacionSalud, que relaciona la tabla de hechos con las dimensiones y expone los códigos, las descripciones, las fechas, las ubicaciones y las medidas necesarias para los dashboards. Se comprobó que conserve una fila por prestación mediante el conteo total y el conteo de claves de prestación distintas. La vista utiliza los registros especiales de DimFecha para las fechas desconocidas o no aplicables. La fecha de recepción se presenta a nivel de día.
+
+Finalmente, se guardaron archivos de control en la carpeta incidencias_etl. Estos contienen el resumen de ubicaciones, los ubigeos sin equivalencia, las incidencias de fechas hospitalarias, las versiones demográficas de identificadores inconsistentes y los resultados de las validaciones monetarias y de fechas. También se documentó el catálogo pendiente de subtipos de cobertura.
+
+Estos archivos permiten conservar evidencia de las decisiones del ETL y distinguir los datos disponibles para el análisis de aquellos que requieren una revisión posterior.
+
+## 5. Desarrollo de los dashboards
+
+Se desarrolló una aplicación interactiva para consultar las prestaciones y los gastos almacenados en el datamart. La aplicación se organizó en tres pestañas: utilización de prestaciones, gastos y copagos, y distribución geográfica y hospitalización.
+
+Esta sección describe la implementación de los indicadores, filtros y visualizaciones. El análisis e interpretación de los resultados se presentan por separado.
+
+### 5.1. Herramientas y conexión con el datamart
+
+La aplicación se implementó en Python mediante el archivo `dashboard_salud.py`. Se utilizaron las siguientes herramientas:
+
+- **Dash:** construcción de la interfaz, pestañas, filtros, tarjetas y tablas.
+
+- **Plotly Express y Graph Objects:** elaboración y personalización de los gráficos interactivos.
+
+- **pandas:** preparación de los datos, aplicación de filtros, agrupaciones y cálculo de indicadores.
+
+- **NumPy:** cálculo de la línea de tendencia de la relación entre estancia y monto.
+
+- **pyodbc:** conexión con SQL Server y consulta de la vista del datamart.
+
+La función `load_data()` consulta `dbo.vwPrestacionSalud` y recupera únicamente los campos utilizados por la aplicación. La lectura se realiza por bloques de 50 000 registros y la conexión se cierra después de completar la consulta.
+
+Antes de construir la interfaz, se comprueba que la vista contenga datos y que PrestacionKey no presente valores vacíos ni repetidos. Esto permite verificar que cada fila consultada represente una prestación.
+
+Las descripciones de diagnósticos, coberturas, sexo y hospitalización, así como los nombres geográficos, se recuperan del datamart. Por tanto, el dashboard utiliza las correspondencias preparadas durante el ETL.
+
+### 5.2. Preparación de los datos y criterios de cálculo
+
+#### 5.2.1. Referencia temporal
+
+Los filtros temporales utilizan la fecha de recepción de información en TEDEF. Esta elección permite delimitar los registros recibidos durante el periodo seleccionado y comparar sus montos asociados.
+
+La fecha de prestación se conserva para calcular la edad en el momento de la atención y la antigüedad de la prestación al recibirse su información:
+
+> Antigüedad en días = fecha de recepción − fecha de prestación
+
+Esta diferencia se utiliza como una medida de antigüedad del registro al momento de su recepción. No se interpreta como tiempo de pago, reembolso o aprobación de la atención.
+
+#### 5.2.2. Edad y grupos etarios
+
+La edad se calcula utilizando la fecha de nacimiento y la fecha de prestación, considerando si el cumpleaños ya había ocurrido en ese año.
+
+Posteriormente, las prestaciones se clasifican en los siguientes grupos etarios:
+
+- De 0 a 11 años.
+
+- De 12 a 17 años.
+
+- De 18 a 29 años.
+
+- De 30 a 44 años.
+
+- De 45 a 59 años.
+
+- De 60 años a más.
+
+Cuando la edad no puede calcularse de manera válida, no se asigna un grupo etario.
+
+#### 5.2.3. Identificadores de pacientes
+
+Debido a las inconsistencias demográficas encontradas durante el ETL, el dashboard utiliza la denominación «Identificadores distintos». Este indicador cuenta las combinaciones diferentes de tipo de documento e identificador anonimizado presentes en la selección.
+
+No se utiliza la cantidad de registros de DimPaciente como número de personas únicas. El indicador de prestaciones por identificador se calcula dividiendo las prestaciones con identificación informada entre la cantidad de identificadores distintos.
+
+#### 5.2.4. Montos, copagos y componentes del gasto
+
+Los montos se convierten a valores numéricos para realizar las agrupaciones y construir las visualizaciones. Los valores cero se conservan y los nulos permanecen diferenciados.
+
+El copago por prestación se calcula cuando los cuatro componentes de copago están informados. Para analizar la composición del gasto se utilizan las prestaciones con los nueve componentes económicos completos, excluyendo los copagos y los campos de totales para evitar duplicar importes.
+
+Los promedios se calculan a partir de los registros correspondientes a la selección. Cuando no existen datos suficientes para calcular un indicador, se muestra «No disponible».
+
+### 5.3. Indicadores implementados
+
+Las tarjetas de la aplicación muestran los siguientes indicadores:
+
+| Indicador | Forma de cálculo |
+| --- | --- |
+| Cantidad de prestaciones | Número de registros incluidos en la selección |
+| Identificadores distintos | Conteo de combinaciones distintas de tipo de documento e identificador anonimizado |
+| Prestaciones por identificador | Prestaciones con identificación informada ÷ identificadores distintos |
+| Monto total liquidado | Suma de TotalLiquidadoIAFAS |
+| Monto promedio por prestación | Monto total liquidado ÷ prestaciones con monto informado |
+| Copago promedio por prestación | Promedio de la suma de los cuatro componentes de copago, considerando únicamente prestaciones con los cuatro componentes informados |
+| Prestaciones hospitalarias | Cantidad de prestaciones con tipo de hospitalización clínica o quirúrgica |
+| Promedio de días de estancia facturable | Promedio de los días informados y no negativos de las prestaciones hospitalarias |
+| Monto promedio por prestación hospitalaria | Promedio de TotalLiquidadoIAFAS entre las prestaciones hospitalarias con monto informado |
+
+Los días de estancia se analizan por prestación registrada, sin asumir que cada fila representa una hospitalización completa.
+
+### 5.4. Diseño de las pestañas
+
+#### 5.4.1. Utilización de prestaciones
+
+Esta pestaña permite consultar la frecuencia y distribución de las prestaciones según su antigüedad, diagnóstico, cobertura y características demográficas.
+
+Incluye tres tarjetas: cantidad de prestaciones, identificadores distintos y prestaciones por identificador. Los filtros disponibles son fecha de recepción, cobertura, sexo y grupo etario.
+
+| Visualización | Implementación |
+| --- | --- |
+| Barras de antigüedad de las prestaciones | Agrupa los registros según los días transcurridos entre prestación y recepción: 0–30, 31–60, 61–90, 91–180 y más de 180 días. Muestra cantidades y permite consultar porcentajes al pasar el cursor. |
+| Barras horizontales de diagnósticos | Presenta los diez diagnósticos con mayor cantidad de prestaciones dentro de la selección. |
+| Barras apiladas de cobertura y sexo | Muestra la cantidad de prestaciones por tipo de cobertura, desagregada por sexo. |
+| Mapa de calor | Cruza los diez diagnósticos más frecuentes de la selección con los grupos etarios, utilizando la intensidad del color para representar las cantidades. |
+
+Los diagnósticos se presentan mediante nombres abreviados para facilitar su lectura. El código y la descripción completa se conservan en la información interactiva de los gráficos. Cuando dos etiquetas abreviadas coinciden, se añade el código para distinguirlas.
+
+#### 5.4.2. Gastos y copagos
+
+Esta pestaña reúne los indicadores y visualizaciones relacionados con los montos liquidados, la composición del gasto y los copagos.
+
+Incluye las tarjetas de monto total liquidado, monto promedio por prestación y copago promedio por prestación. Los filtros generales son fecha de recepción y cobertura.
+
+| Visualización | Implementación |
+| --- | --- |
+| Barras por mes de recepción | Muestra el monto total o el monto promedio por prestación de los registros recibidos en cada mes, según la medida seleccionada. |
+| Barras horizontales por diagnóstico | Presenta los diez diagnósticos con mayor monto total o promedio liquidado. El ranking por promedio exige al menos diez prestaciones con monto informado por diagnóstico. |
+| Barras apiladas al 100 % | Presenta la participación de los nueve componentes del gasto dentro de cada cobertura, utilizando registros con todos los componentes informados. |
+| Diagrama de caja por IPRESS | Compara los montos por prestación para un diagnóstico y una cobertura determinados. Incluye hasta ocho IPRESS con mayor cantidad de observaciones, exigiendo al menos diez prestaciones con monto informado por establecimiento. |
+| Tabla de copagos | Presenta, por IAFAS y cobertura, la cantidad de prestaciones, la cantidad con copago completo informado y el copago promedio. |
+
+El diagrama de caja cuenta con filtros locales situados encima del gráfico. La cobertura de comparación respeta la cobertura general seleccionada; cuando el filtro general incluye todas las coberturas, se permite elegir una para la comparación.
+
+El diagnóstico seleccionado afecta únicamente a este gráfico, conservando los indicadores y rankings generales de la pestaña. La lista ofrece hasta 15 diagnósticos frecuentes dentro del periodo y cobertura correspondientes.
+
+Para facilitar la lectura de las cajas se incorporaron dos opciones:
+
+- Vista central (P95): amplía el área comprendida hasta el percentil 95 de los montos de la comparación.
+
+- Rango completo: muestra la distribución con su escala completa.
+
+La opción P95 modifica únicamente el rango visible del eje. Los valores extremos permanecen en los datos utilizados para calcular las cajas, sus estadísticas y las cantidades de prestaciones.
+
+Las IPRESS e IAFAS se presentan mediante etiquetas consistentes, como «IPRESS 1» e «IAFAS 1», asociadas con sus códigos anonimizados. Estas etiquetas no identifican sus nombres reales.
+
+#### 5.4.3. Distribución geográfica y hospitalización
+
+La tercera pestaña se organiza en dos bloques: distribución territorial y prestaciones hospitalarias. Ambos utilizan el filtro de fecha de recepción.
+
+**Distribución geográfica**
+
+Se incorporó un selector para alternar entre la ubicación de la IPRESS y la del afiliado. La tabla muestra ubigeo INEI, departamento, provincia, distrito, cantidad de prestaciones, monto total y monto promedio liquidado.
+
+La información territorial procede de DimUbicacion, incluyendo el registro «Desconocido» cuando no existe una ubicación disponible. La tabla permite ordenar sus columnas y consultar los registros mediante paginación.
+
+**Prestaciones hospitalarias**
+
+Se incluyen las tarjetas de cantidad de prestaciones hospitalarias, promedio de días de estancia facturable y monto promedio por prestación hospitalaria.
+
+| Visualización | Implementación |
+| --- | --- |
+| Barras horizontales por diagnóstico | Presenta hasta diez diagnósticos con mayor promedio de días de estancia facturable, exigiendo al menos diez prestaciones con días informados por diagnóstico. |
+| Barras agrupadas de estancia | Muestra la distribución porcentual de las prestaciones por rangos de días, diferenciando hospitalización clínica y quirúrgica. Requiere seleccionar un diagnóstico. |
+| Dispersión con burbujas y tendencia | Relaciona los días de estancia facturable con el monto promedio liquidado, dentro de un diagnóstico seleccionado. El tamaño de las burbujas representa la cantidad de prestaciones agrupadas. |
+
+La distribución de estancia utiliza los intervalos 0–1, 2–3, 4–7, 8–14, 15–30 y más de 30 días. Los porcentajes se calculan dentro de cada tipo de hospitalización, y la información interactiva muestra las cantidades utilizadas.
+
+Los gráficos de distribución y dispersión cuentan con filtros de diagnóstico independientes, ubicados encima de cada visualización. Sus listas incluyen hasta 15 diagnósticos frecuentes del contexto hospitalario y periodo seleccionados.
+
+En el gráfico de dispersión, cada burbuja representa el monto promedio de las prestaciones que comparten una cantidad de días de estancia. La línea de tendencia se ajusta mediante regresión lineal sobre las prestaciones individuales con días y monto informados. De esta manera, el ajuste considera la cantidad de observaciones representadas por cada promedio.
+
+La línea se incorpora como referencia descriptiva de la asociación entre las variables. Si los días de estancia no presentan variación, se omite el ajuste y se muestra un aviso.
+
+### 5.5. Interactividad y presentación
+
+La actualización de la aplicación se implementó mediante callbacks de Dash. Los componentes Input reciben los cambios en filtros y selectores; los componentes Output actualizan indicadores, gráficos, tablas y opciones de selección. También se utilizan componentes State para conservar una selección cuando continúa siendo válida.
+
+Las listas de diagnósticos se actualizan según el contexto y el periodo seleccionado. Se estableció un máximo de 15 opciones y un mínimo inicial de 10 prestaciones para evitar que las comparaciones dependan de categorías con muy pocas observaciones. Este mínimo constituye un criterio exploratorio de presentación, no una garantía de representatividad estadística.
+
+Los filtros locales permiten modificar una comparación sin limitar innecesariamente los demás gráficos de la pestaña. Cuando una selección no reúne registros o no cumple el mínimo establecido, la aplicación presenta un mensaje informativo.
+
+Las tablas incluyen ordenamiento y paginación. Los gráficos permiten consultar valores al pasar el cursor y utilizar las herramientas de exploración de Plotly. La aplicación se ejecuta localmente en [http://127.0.0.1:8050](http://127.0.0.1:8050), consultando los datos del datamart al iniciar.
 
 ## Bibliografía
 
-IBM. (2021, 30 de julio). *What is OLAP?* https://www.ibm.com/think/topics/olap
+IBM. (s. f.-a). *¿Qué es business intelligence (BI)?* [https://www.ibm.com/mx-es/think/topics/business-intelligence](https://www.ibm.com/mx-es/think/topics/business-intelligence)
 
-IBM. (s. f.). *¿Qué es Business Intelligence (BI)?* https://www.ibm.com/mx-es/think/topics/business-intelligence
+IBM. (s. f.-b). *¿Qué es un mercado de datos?* [https://www.ibm.com/mx-es/think/topics/data-mart](https://www.ibm.com/mx-es/think/topics/data-mart)
 
-IBM. (s. f.). *¿Qué es un mercado de datos?* https://www.ibm.com/mx-es/think/topics/data-mart
+IBM. (s. f.-c). *What is a data warehouse?* [https://www.ibm.com/think/topics/data-warehouse](https://www.ibm.com/think/topics/data-warehouse)
 
-IBM. (s. f.). *What is a data warehouse?* https://www.ibm.com/think/topics/data-warehouse
+IBM. (s. f.-d). *What is ETL (extract, transform, load)?* [https://www.ibm.com/think/topics/etl](https://www.ibm.com/think/topics/etl)
 
-IBM. (s. f.). *What is ETL (extract, transform, load)?* https://www.ibm.com/think/topics/etl
+IBM. (s. f.-e). *What is OLAP?* [https://www.ibm.com/think/topics/olap](https://www.ibm.com/think/topics/olap)
 
-Instituto Nacional de Estadística e Informática. (s. f.). *Ubigeos (códigos de ubicación geográfica)*. Plataforma Nacional de Datos Abiertos. https://www.datosabiertos.gob.pe/dataset/ubigeos-c%C3%B3digos-de-ubicaci%C3%B3n-geogr%C3%A1fica-instituto-nacional-de-estad%C3%ADstica-e-inform%C3%A1tica-inei
+Kimball, R. (2008, 5 de noviembre). *Fact tables*. Kimball Group. [https://www.kimballgroup.com/2008/11/fact-tables/](https://www.kimballgroup.com/2008/11/fact-tables/)
 
-Kimball Group. (s. f.). *Dimensional modeling techniques*. https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/
+Kimball Group. (s. f.). *Dimensional modeling techniques*. [https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/)
 
-Kimball, R. (2008, 5 de noviembre). *Fact tables*. Kimball Group. https://www.kimballgroup.com/2008/11/fact-tables/
+Microsoft. (s. f.). *Understand star schema and the importance for Power BI*. Microsoft Learn. [https://learn.microsoft.com/en-us/power-bi/guidance/star-schema](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)
 
-Microsoft. (s. f.). *Understand star schema and the importance for Power BI*. Microsoft Learn. https://learn.microsoft.com/en-us/power-bi/guidance/star-schema
+Ministerio de Salud. (s. f.-a). *CIE-10 (MINSA – Excel)* [Catálogo]. Repositorio Único Nacional de Información en Salud. [https://www.minsa.gob.pe/reunis/?niv=1&op=3](https://www.minsa.gob.pe/reunis/?niv=1&op=3)
 
-Oracle. (2023, 8 de junio). *What is a data warehouse?* https://www.oracle.com/database/what-is-a-data-warehouse/
+Ministerio de Salud. (s. f.-b). *Códigos equivalentes de ubigeo del Perú* [Conjunto de datos]. Plataforma Nacional de Datos Abiertos. Recuperado el 9 de noviembre de 2026, de [https://www.datosabiertos.gob.pe/dataset/codigos-equivalentes-de-ubigeo-del-peru](https://www.datosabiertos.gob.pe/dataset/codigos-equivalentes-de-ubigeo-del-peru)
 
-Superintendencia Nacional de Salud. (2025). *Registro de datos de atenciones de la cobertura prestacional de salud del sector privado*. Plataforma Nacional de Datos Abiertos. https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado
+NumPy. (s. f.). *NumPy documentation*. [https://numpy.org/doc/](https://numpy.org/doc/)
 
-Superintendencia Nacional de Salud. (s. f.). *Información institucional*. Plataforma Digital Única del Estado Peruano. https://www.gob.pe/institucion/susalud/institucional
+Oracle. (2023, 8 de junio). *What is a data warehouse?* [https://www.oracle.com/database/what-is-a-data-warehouse/](https://www.oracle.com/database/what-is-a-data-warehouse/)
 
+pandas development team. (s. f.). *pandas documentation*. [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)
+
+Plotly. (s. f.-a). *Dash documentation & user guides*. [https://dash.plotly.com/](https://dash.plotly.com/)
+
+Plotly. (s. f.-b). *Open source Python graphing and data visualization library*. [https://plotly.com/python/](https://plotly.com/python/)
+
+Python Software Foundation. (s. f.). *decimal — Decimal fixed-point and floating-point arithmetic*. Python documentation. [https://docs.python.org/3/library/decimal.html](https://docs.python.org/3/library/decimal.html)
+
+Superintendencia Nacional de Salud. (s. f.). *Información institucional*. Plataforma Digital Única del Estado Peruano. [https://www.gob.pe/institucion/susalud/institucional](https://www.gob.pe/institucion/susalud/institucional)
+
+Superintendencia Nacional de Salud. (2025a). *Diccionario de datos TEDEF - Atenciones* [Diccionario de datos]. Plataforma Nacional de Datos Abiertos. [https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado-1](https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado-1)
+
+Superintendencia Nacional de Salud. (2025b). *Registro de datos de atenciones de la cobertura prestacional de salud del sector privado* [Conjunto de datos]. Plataforma Nacional de Datos Abiertos. Recuperado el 9 de noviembre de 2026, de [https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado](https://www.datosabiertos.gob.pe/dataset/registro-de-datos-de-atenciones-de-la-cobertura-prestacional-de-salud-del-sector-privado)
