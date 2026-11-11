@@ -820,6 +820,120 @@ Los filtros locales permiten modificar una comparación sin limitar innecesariam
 
 Las tablas incluyen ordenamiento y paginación. Los gráficos permiten consultar valores al pasar el cursor y utilizar las herramientas de exploración de Plotly. La aplicación se ejecuta localmente en [http://127.0.0.1:8050](http://127.0.0.1:8050), consultando los datos del datamart al iniciar.
 
+## 6. Resultados e interpretación
+
+El análisis de **781 556 registros** de enero a marzo de 2026 muestra por qué conviene separar la fecha de atención de la fecha de recepción en TEDEF. También conviene revisar el número de prestaciones y el monto liquidado: cada medida ayuda a identificar casos distintos para el seguimiento mensual.
+
+### 6.1. Febrero concentró la recepción de registros
+
+![Prestaciones por mes de recepción](imagenes/capturas_dashboard/prestaciones_por_mes.png)
+
+![Antigüedad de las prestaciones al recibirse](imagenes/capturas_dashboard/antiguedad_recepcion.png)
+
+*Figura 1. Prestaciones agrupadas por mes de recepción en Excel y días transcurridos entre la atención y la recepción en el dashboard.*
+
+En febrero llegaron **439 225 registros**, el **56,20 %** del periodo. Al sumar los intervalos de más de 30 días del gráfico de antigüedad, se obtiene que **748 216 prestaciones (95,73 %)** se recibieron más de 30 días después de la atención. El pico de febrero describe la llegada de registros. Para saber si también hubo más atenciones en febrero, habría que agrupar por fecha de prestación.
+
+### 6.2. Frecuencia y monto destacan diagnósticos distintos
+
+![Diez diagnósticos con más prestaciones](imagenes/capturas_dashboard/diagnosticos_por_frecuencia.png)
+
+![Diez diagnósticos con mayor monto total liquidado](imagenes/capturas_dashboard/diagnosticos_por_monto.png)
+
+*Figura 2. Rankings del dashboard por número de prestaciones y por monto total liquidado.*
+
+La **caries de la dentina** lideró por frecuencia, con **29 100 prestaciones**, y la **hipertensión esencial** lideró por monto liquidado, con **S/ 9 062 895,09**. Si priorizáramos solo por volumen, podríamos dejar de lado diagnósticos con un peso importante en el gasto. Por eso, la revisión mensual debería considerar ambas medidas.
+
+### 6.3. Los montos varían entre IPRESS aun con el mismo diagnóstico y cobertura
+
+![Montos por IPRESS para caries de la dentina con cobertura ambulatoria](imagenes/capturas_dashboard/caries_ambulatoria_ipress.png)
+
+*Figura 3. Distribución de montos por prestación para caries de la dentina, cobertura ambulatoria, en vista central P95.*
+
+Para el mismo diagnóstico y cobertura, las cajas muestran diferencias en las medianas y en la dispersión entre establecimientos. Como complemento, calculamos en Excel que los **promedios estuvieron entre S/ 87,60 y S/ 153,32** para las ocho IPRESS con más registros y al menos 30 observaciones. Las líneas dentro de las cajas muestran las medianas. Las diferencias sirven para elegir qué casos revisar; antes de atribuirlas al desempeño de una IPRESS, habría que conocer las características de las atenciones y las condiciones de contratación.
+
+![Participación de los componentes del gasto](imagenes/capturas_dashboard/componentes_del_gasto.png)
+
+*Figura 4. Principales componentes del gasto, calculados en Excel.*
+
+**Farmacia e insumos** representó el **41,37 % de la suma de los nueve componentes del gasto**. Por su peso, es una categoría que conviene revisar al investigar diferencias de gasto entre grupos.
+
+### 6.4. La hospitalización merece seguimiento propio
+
+![Conteo, estancia media y monto promedio de prestaciones hospitalarias](imagenes/capturas_dashboard/indicadores_hospitalarios.png)
+
+*Figura 5. Indicadores hospitalarios del dashboard para el periodo completo.*
+
+Las **11 691 prestaciones hospitalarias** representan el **1,50 %** del volumen. El dashboard muestra un **monto promedio de S/ 8 865,98** por prestación hospitalaria. Al calcular en Excel la participación de este grupo en el monto total liquidado, obtuvimos **30,10 %**. Esa participación justifica revisar la hospitalización por diagnóstico y acompañar los promedios con el número de prestaciones. La concentración del gasto, por sí sola, no demuestra sobrecostos.
+
+## 7. Propuesta de mejora
+
+### 7.1. Piloto de revisión mensual de prestaciones y gasto
+
+Proponemos un **piloto de ocho semanas** para incorporar el dashboard a la revisión mensual de prestaciones y gasto. El objetivo es que cada corte termine con datos validados, casos que merezcan seguimiento y una acción acordada para cada uno.
+
+La revisión partiría de dos preguntas: **¿qué registros llegaron en el mes?** y **¿cuándo se realizaron las prestaciones reportadas?** Separar ambas fechas evitaría interpretar un pico de recepción como un aumento de atenciones. Después, el equipo revisaría los diagnósticos por número de prestaciones y por monto liquidado, con un seguimiento específico de la hospitalización por su peso en el gasto.
+
+### 7.2. Etapas y responsables
+
+| Etapa | Actividades | Entregable |
+| --- | --- | --- |
+| **Semanas 1 a 3: preparar el corte** | Ingeniería de datos diseña la carga periódica, verifica que no se dupliquen prestaciones y concilia los conteos y montos con la fuente. También comprueba que el reporte mantenga separadas las fechas de atención y recepción. | Primer corte validado y registro de las incidencias de carga. |
+| **Semanas 3 a 6: seleccionar y revisar los casos** | El analista BI prioriza casos por volumen y monto liquidado. Para comparar IPRESS, revisa grupos con el mismo diagnóstico y cobertura y muestra cuántas prestaciones respaldan cada resultado. El referente funcional determina si hace falta revisar procedimientos, componentes del gasto o condiciones de contratación. | Casos priorizados y fichas con la evidencia, la acción acordada y su responsable. |
+| **Semanas 5 a 8: validar el reporte con los usuarios** | El equipo de pruebas comprueba que los filtros y los indicadores devuelvan los resultados esperados. Coordinación revisa con los usuarios si el reporte les permite decidir qué casos investigar y qué información adicional necesitan. | Resultados de las pruebas y lista de ajustes y pendientes para el siguiente corte. |
+
+Por ejemplo, si dos IPRESS muestran montos distintos para **caries de la dentina con cobertura ambulatoria**, la ficha registraría los filtros aplicados, el número de prestaciones y la diferencia observada. Si el dashboard no permite explicarla, la acción sería revisar los procedimientos o las condiciones de contratación antes de atribuirla al desempeño del establecimiento.
+
+El ETL actual realiza una **carga inicial**. Para sostener el proceso mensual, el piloto tendría que incorporar nuevos cortes sin duplicar prestaciones y actualizar el dashboard después de validar los datos.
+
+### 7.3. Presupuesto y evaluación
+
+El presupuesto referencial del piloto es de **S/ 13 409**: **S/ 11 660** por 220 horas de trabajo y **S/ 1 749** de reserva. Una vez implementado el proceso, el mantenimiento se estima en **S/ 600 mensuales**.
+
+Se propone **conciliar el 100 % de los cortes procesados, aprobar el 100 % de las pruebas definidas y completar 10 fichas de hallazgo**. Al cierre de las ocho semanas, se comparará el tiempo de preparación del reporte antes y después del piloto. También se revisará con los usuarios si las fichas les ayudaron a decidir qué casos investigar
+
+## 8. Análisis de los resultados de Business Intelligence
+
+### 8.1. La fecha elegida cambia la interpretación del volumen mensual
+
+El hecho de que febrero concentre el **56,20 % de los registros recibidos** muestra que en ese mes ingresó más información a TEDEF. Sin embargo, el **95,73 % de las prestaciones** se recibió más de 30 días después de la atención. Por lo tanto, el volumen recibido en febrero puede incluir prestaciones de meses anteriores. Si se usara ese dato para afirmar que aumentó la demanda en febrero, se estaría interpretando la fecha de recepción como si fuera la fecha de atención.
+
+Esta diferencia afecta cómo se debería usar el reporte mensual. La **fecha de recepción** permite saber qué registros se incorporaron en cada corte. La **fecha de atención** permite analizar cuándo se realizaron las prestaciones que ya fueron reportadas. Además, los meses de atención más recientes podrían estar incompletos porque todavía pueden llegar registros. Por eso, el piloto debería mostrar ambas fechas y revisar la antigüedad de los registros antes de interpretar una caída reciente como una reducción de las atenciones.
+
+### 8.2. La prioridad cambia según el indicador que se utilice
+
+La **caries de la dentina** encabeza el ranking por frecuencia, con **29 100 prestaciones**, mientras que la **hipertensión esencial** lidera por monto total liquidado, con **S/ 9 062 895,09**. Cada ranking responde a una pregunta distinta. El primero ayuda a identificar qué diagnósticos aparecen con mayor frecuencia en los registros; el segundo muestra cuáles tienen mayor peso en el monto liquidado. Si se utilizara solo uno de los rankings, parte de esa información quedaría fuera de la revisión.
+
+La hospitalización muestra por qué conviene combinar ambos criterios. Las **11 691 prestaciones hospitalarias** representan apenas el **1,50 % del volumen**, pero, según el cálculo complementario en Excel, concentran el **30,10 % del monto total liquidado**. Una revisión basada únicamente en el número de prestaciones podría dejar este grupo en segundo plano. Su peso en el monto justifica darle seguimiento específico por diagnóstico, mostrando el monto total, el promedio y la cantidad de prestaciones que lo sustentan. Esa concentración indica dónde conviene profundizar; por sí sola, no demuestra que exista un sobrecosto.
+
+### 8.3. Las diferencias entre establecimientos necesitan contexto
+
+Al comparar la caries de la dentina con cobertura ambulatoria, las IPRESS presentan diferencias en sus medianas y en la dispersión de los montos. El cálculo complementario en Excel también muestra que, entre las ocho IPRESS con más registros y al menos 30 observaciones, los montos promedio estuvieron entre **S/ 87,60 y S/ 153,32**. Aunque se mantengan el diagnóstico y la cobertura, todavía pueden variar los procedimientos realizados y las condiciones de contratación. Por eso, estos resultados sirven para seleccionar casos que merecen revisión, pero no bastan para calificar a un establecimiento como más caro o menos eficiente.
+
+La composición del gasto ayuda a decidir por dónde empezar. **Farmacia e insumos** representa el **41,37 % de la suma de los nueve componentes analizados**, por lo que es una categoría razonable para revisar cuando se investigan diferencias de gasto. Sin embargo, ese porcentaje corresponde al conjunto de componentes y no explica, por sí mismo, las diferencias entre las IPRESS del gráfico. Para saber si ese componente explica parte de la variación, habría que revisarlo dentro del diagnóstico y la cobertura seleccionados.
+
+## 9. Conclusiones
+
+1. **El mes de recepción y el mes de atención responden a preguntas distintas.** El volumen recibido en febrero refleja cuándo ingresaron los registros a TEDEF. Dado que la mayoría llegó más de 30 días después de la atención, la fecha de recepción no permite identificar por sí sola el mes con mayor actividad asistencial. Esta distinción es necesaria para comparar cortes mensuales sin confundir cambios en el reporte con cambios en las atenciones.
+
+2. **La frecuencia y el monto liquidado deben utilizarse juntos para establecer prioridades.** La caries de la dentina destaca por volumen y la hipertensión esencial por monto total. La hospitalización refuerza esa diferencia: reúne una proporción pequeña de las prestaciones y una parte importante del monto liquidado. El seguimiento debe considerar tanto los grupos frecuentes como los que concentran montos altos.
+
+3. **El dashboard ayuda a detectar diferencias que requieren revisión.** Comparar establecimientos para un mismo diagnóstico y cobertura hace más útil el análisis, pero todavía se necesita información sobre los procedimientos y las condiciones de contratación para explicar las diferencias. El valor del dashboard está en orientar esa revisión y mostrar la evidencia que la motiva.
+
+4. **El piloto convierte el análisis en un proceso de seguimiento.** Cada corte mensual debería terminar con datos validados, casos priorizados y acciones asignadas. El proyecto ya cuenta con una carga inicial y un dashboard; incorporar nuevos cortes sin duplicar prestaciones y evaluar la utilidad del reporte son tareas del piloto propuesto.
+
+## 10. Recomendaciones
+
+1. **Preparar dos vistas de cada corte mensual.** Usar la fecha de recepción para mostrar qué registros se incorporaron y la fecha de atención para analizar cuándo se realizaron las prestaciones reportadas. Incluir un indicador de antigüedad y señalar cuando un mes reciente todavía pueda estar incompleto.
+
+2. **Seleccionar los casos de revisión por volumen y por monto liquidado.** Mantener ambos criterios en el reporte mensual y reservar una revisión específica para la hospitalización. Para cada diagnóstico seleccionado, mostrar el número de prestaciones, el monto total y el monto promedio, de modo que se pueda distinguir si el total se explica por muchas prestaciones o si el monto por prestación también es elevado.
+
+3. **Documentar las comparaciones entre IPRESS antes de tomar decisiones.** Revisar grupos con el mismo diagnóstico y cobertura, indicar cuántos registros respaldan la comparación y distinguir el promedio de la mediana. Si una diferencia merece seguimiento, pedir al referente funcional que revise los procedimientos, los componentes del gasto y las condiciones de contratación antes de atribuirla al establecimiento.
+
+4. **Evaluar el piloto antes de extenderlo.** Conciliar los conteos y montos de cada carga, comprobar que los filtros y los indicadores produzcan resultados reproducibles y registrar los casos revisados en las fichas de hallazgo. Al finalizar las ocho semanas, comparar el tiempo de preparación del reporte con el proceso anterior y verificar con los usuarios si el reporte les ayudó a decidir qué casos revisar.
+
+*Fuentes de los resultados: dashboard del proyecto y cálculos complementarios en Excel sobre la base consolidada de TEDEF.*
+
 ## Bibliografía
 
 IBM. (s. f.-a). *¿Qué es business intelligence (BI)?* [https://www.ibm.com/mx-es/think/topics/business-intelligence](https://www.ibm.com/mx-es/think/topics/business-intelligence)
