@@ -864,15 +864,25 @@ Para el mismo diagnóstico y cobertura, las cajas muestran diferencias en las me
 
 *Figura 5. Indicadores hospitalarios del dashboard para el periodo completo.*
 
+| Prestaciones totales | Prestaciones hospitalarias | Monto total liquidado | Monto liquidado en hospitalización | Participación hospitalaria en el monto total |
+| ---: | ---: | ---: | ---: | ---: |
+| 781 556 | 11 691 | S/ 344 340 795,09 | S/ 103 652 199,97 | 30,10 % |
+
+*Fuente: consulta SQL sobre `dbo.vwPrestacionSalud`, con registros recibidos entre enero y marzo de 2026.*
+
 Las **11 691 prestaciones hospitalarias** representan el **1,50 %** del volumen. El dashboard muestra un **monto promedio de S/ 8 865,98** por prestación hospitalaria. Al calcular en Excel la participación de este grupo en el monto total liquidado, obtuvimos **30,10 %**. Esa participación justifica revisar la hospitalización por diagnóstico y acompañar los promedios con el número de prestaciones. La concentración del gasto, por sí sola, no demuestra sobrecostos.
 
 ## 7. Propuesta de mejora
 
 ### 7.1. Piloto de revisión mensual de prestaciones y gasto
 
-Proponemos un **piloto de ocho semanas** para incorporar el dashboard a la revisión mensual de prestaciones y gasto. El objetivo es que cada corte termine con datos validados, casos que merezcan seguimiento y una acción acordada para cada uno.
+## 7. Propuesta de mejora
 
-La revisión partiría de dos preguntas: **¿qué registros llegaron en el mes?** y **¿cuándo se realizaron las prestaciones reportadas?** Separar ambas fechas evitaría interpretar un pico de recepción como un aumento de atenciones. Después, el equipo revisaría los diagnósticos por número de prestaciones y por monto liquidado, con un seguimiento específico de la hospitalización por su peso en el gasto.
+Proponemos un **piloto de ocho semanas** para incorporar una revisión mensual de las prestaciones y sus montos liquidados. En cada corte, se distinguirá el mes de atención del mes de recepción y se priorizarán los casos según el número de prestaciones y el monto liquidado. Se dará seguimiento específico a la hospitalización, que representa el **1,50 % de las prestaciones** y el **30,10 % del monto total liquidado**, según la consulta SQL.
+
+Para implementar la revisión mensual, será necesario adaptar el ETL actual para incorporar nuevos cortes sin duplicar prestaciones y validar los conteos y montos antes de actualizar el dashboard.
+
+El presupuesto referencial del piloto es de **S/ 13 409**, con un mantenimiento estimado de **S/ 600 mensuales**. Al cierre, se evaluará si los cortes se pudieron validar, si el reporte redujo el tiempo de preparación y si ayudó a los usuarios a identificar qué casos merecen seguimiento.
 
 ### 7.2. Etapas y responsables
 
